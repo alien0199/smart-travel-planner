@@ -109,13 +109,13 @@ const Index = () => {
         <div className="p-6">
           <div className="tip-box" style={{ background: 'hsl(152 81% 96%)', borderColor: 'hsl(151 81% 71%)' }}>
             <div className="font-extrabold text-lg mb-2 text-taiwan-green flex items-center gap-2">
-              📝 Online Arrival Card (Update 2026)
+              📝 Taiwan Arrival Card - TWAC (Update ต.ค. 2025)
             </div>
             <p className="text-sm mb-2 text-emerald-900">
-              เนื่องจาก <b>Taiwan Lucky Land จบแคมเปญแล้ว</b> สิ่งที่ควรทำแทนคือ "กรอกใบ ตม. ออนไลน์" ล่วงหน้า (1-30 วันก่อนบิน) เพื่อความรวดเร็วในการเข้าเมืองครับ
+              ตั้งแต่ <b>1 ตุลาคม 2025</b> ชาวต่างชาติต้องกรอก "Taiwan Arrival Card (TWAC)" ออนไลน์ <b>ภายใน 3 วันก่อนเดินทางถึง</b> เพื่อความรวดเร็วในการผ่าน ตม. ครับ
             </p>
-            <a href="https://niaspeedy.immigration.gov.tw/webacard/" target="_blank" rel="noopener noreferrer" className="underline text-taiwan-green font-bold text-sm">
-              👉 กรอก Arrival Card ที่นี่
+            <a href="https://twac.immigration.gov.tw/" target="_blank" rel="noopener noreferrer" className="underline text-taiwan-green font-bold text-sm">
+              👉 กรอก Taiwan Arrival Card (TWAC) ที่นี่
             </a>
           </div>
           <ul className="list-none p-0 m-0 mt-4 space-y-2">
