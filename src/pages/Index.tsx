@@ -23,18 +23,47 @@ const Index = () => {
 
     // Restore scroll position if coming back from map
     const lastDay = sessionStorage.getItem('lastViewedDay');
-    const lastStop = sessionStorage.getItem('lastViewedStop');
+    const lastClickedTitle = sessionStorage.getItem('lastClickedTitle');
     
-    if (lastDay) {
+    if (lastDay && lastClickedTitle) {
       setTimeout(() => {
-        const dayElement = document.getElementById(`day${lastDay}`);
-        if (dayElement) {
-          dayElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // หา element ที่มี title ตรงกับที่กดไป
+        const allMapLinks = document.querySelectorAll('.map-link');
+        let targetElement: Element | null = null;
+        
+        allMapLinks.forEach((link) => {
+          const parent = link.closest('[data-mission]') || link.parentElement;
+          if (parent && parent.textContent?.includes(lastClickedTitle)) {
+            targetElement = parent;
+          }
+        });
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Highlight effect
+          (targetElement as HTMLElement).style.transition = 'all 0.3s ease';
+          (targetElement as HTMLElement).style.backgroundColor = 'hsl(48 100% 90%)';
+          (targetElement as HTMLElement).style.borderRadius = '8px';
+          (targetElement as HTMLElement).style.padding = '4px';
+          setTimeout(() => {
+            (targetElement as HTMLElement).style.backgroundColor = '';
+            (targetElement as HTMLElement).style.padding = '';
+          }, 2000);
+        } else {
+          // Fallback to day section
+          const dayElement = document.getElementById(`day${lastDay}`);
+          if (dayElement) {
+            dayElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }
+        
         // Clear after scrolling
         sessionStorage.removeItem('lastViewedDay');
         sessionStorage.removeItem('lastViewedStop');
-      }, 100);
+        sessionStorage.removeItem('lastClickedDay');
+        sessionStorage.removeItem('lastClickedStop');
+        sessionStorage.removeItem('lastClickedTitle');
+      }, 200);
     }
   }, []);
 
