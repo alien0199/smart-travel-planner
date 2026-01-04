@@ -283,17 +283,41 @@
     animation: popup-enter 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 0 4px currentColor, 0 0 15px currentColor;
+  /* Map Marker Styles */
+  .map-marker-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .marker-pulse-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid currentColor;
+    animation: marker-pulse 1.5s ease-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes marker-pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
     }
-    50% {
-      box-shadow: 0 0 0 8px transparent, 0 0 25px currentColor;
+    100% {
+      transform: scale(2.5);
+      opacity: 0;
     }
   }
 
-  .marker-selected {
-    animation: pulse-glow 1.5s ease-in-out infinite !important;
+  .marker-active .map-marker-inner {
+    z-index: 10;
+  }
+
+  .selected-marker-container {
+    z-index: 1000 !important;
   }
 
   /* Mali font for cute elements */

@@ -32,6 +32,10 @@ const NavigationPopup = ({
   if (!isOpen) return null;
 
   const handleViewOnMap = () => {
+    // บันทึกตำแหน่งล่าสุดก่อน navigate ไปแผนที่
+    sessionStorage.setItem('lastClickedDay', day.toString());
+    sessionStorage.setItem('lastClickedStop', stopIndex.toString());
+    sessionStorage.setItem('lastClickedTitle', title);
     navigate(`/map?day=${day}&stop=${stopIndex}`);
   };
 

@@ -73,13 +73,17 @@ const TravelMap = () => {
     // Add markers
     data.points.forEach((point, index) => {
       const isSelected = focusStop === index;
+      const markerSize = isSelected ? 48 : 36;
       const icon = L.divIcon({
-        html: `<div class="map-marker ${isSelected ? 'marker-selected' : ''}" style="background:${data.color}; width:36px; height:36px; border-radius:50%; border:3px solid white; display:flex; align-items:center; justify-content:center; color:white; font-size:14px; box-shadow:${isSelected ? `0 0 0 4px ${data.color}40, 0 0 20px ${data.color}80` : '0 2px 8px rgba(0,0,0,0.3)'};">
-          ${getIconEmoji(point.type)}
+        html: `<div class="map-marker-wrapper ${isSelected ? 'marker-active' : ''}">
+          ${isSelected ? `<div class="marker-pulse-ring" style="border-color: ${data.color};"></div>` : ''}
+          <div class="map-marker-inner" style="background:${data.color}; width:${markerSize}px; height:${markerSize}px; border-radius:50%; border:${isSelected ? '4px' : '3px'} solid white; display:flex; align-items:center; justify-content:center; color:white; font-size:${isSelected ? '18px' : '14px'}; box-shadow:${isSelected ? `0 0 0 4px ${data.color}, 0 0 30px ${data.color}` : '0 2px 8px rgba(0,0,0,0.3)'}; transform: ${isSelected ? 'scale(1.1)' : 'scale(1)'}; transition: all 0.3s ease;">
+            ${getIconEmoji(point.type)}
+          </div>
         </div>`,
-        className: '',
-        iconSize: [36, 36],
-        iconAnchor: [18, 18]
+        className: isSelected ? 'selected-marker-container' : '',
+        iconSize: [markerSize, markerSize],
+        iconAnchor: [markerSize / 2, markerSize / 2]
       });
 
       const marker = L.marker(point.coords as [number, number], { icon }).addTo(map);
@@ -119,13 +123,17 @@ const TravelMap = () => {
     markersRef.current.forEach((marker, index) => {
       const point = data.points[index];
       const isSelected = index === selectedIndex;
+      const markerSize = isSelected ? 48 : 36;
       const icon = L.divIcon({
-        html: `<div class="map-marker ${isSelected ? 'marker-selected' : ''}" style="background:${color}; width:36px; height:36px; border-radius:50%; border:3px solid white; display:flex; align-items:center; justify-content:center; color:white; font-size:14px; box-shadow:${isSelected ? `0 0 0 4px ${color}40, 0 0 20px ${color}80` : '0 2px 8px rgba(0,0,0,0.3)'}; ${isSelected ? 'animation: pulse-ring 1.5s ease-out infinite;' : ''}">
-          ${getIconEmoji(point.type)}
+        html: `<div class="map-marker-wrapper ${isSelected ? 'marker-active' : ''}">
+          ${isSelected ? `<div class="marker-pulse-ring" style="border-color: ${color};"></div>` : ''}
+          <div class="map-marker-inner" style="background:${color}; width:${markerSize}px; height:${markerSize}px; border-radius:50%; border:${isSelected ? '4px' : '3px'} solid white; display:flex; align-items:center; justify-content:center; color:white; font-size:${isSelected ? '18px' : '14px'}; box-shadow:${isSelected ? `0 0 0 4px ${color}, 0 0 30px ${color}` : '0 2px 8px rgba(0,0,0,0.3)'}; transform: ${isSelected ? 'scale(1.1)' : 'scale(1)'}; transition: all 0.3s ease;">
+            ${getIconEmoji(point.type)}
+          </div>
         </div>`,
-        className: '',
-        iconSize: [36, 36],
-        iconAnchor: [18, 18]
+        className: isSelected ? 'selected-marker-container' : '',
+        iconSize: [markerSize, markerSize],
+        iconAnchor: [markerSize / 2, markerSize / 2]
       });
       marker.setIcon(icon);
     });
