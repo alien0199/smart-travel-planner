@@ -36,13 +36,13 @@ export const locations: LocationsData = {
         coords: [25.0478, 121.5170], type: "transit", title: "Taipei Main Station",
         desc: "ถึงสถานีหลัก เดินไปโรงแรม (Exit Z)",
         review: "สถานีใหญ่เหมือนเขาวงกต! ให้มองหาป้ายทางออก Z (Z Underground Mall) เพื่อเดินไปโรงแรม Mayer Inn จะเดินง่ายที่สุด ไม่ต้องขึ้นลงบันไดเยอะ",
-        googleMapsQuery: "Taipei Main Station Taiwan"
+        googleMapsQuery: "台北車站 Taipei Main Station Taiwan"
       },
       {
         coords: [25.0464, 121.5169], type: "hotel", title: "Mayer Inn",
         desc: "Check-in เก็บกระเป๋า (Base)",
         review: "ทำเลเทพมาก! อยู่ตึกเดียวกับ H&M ตรงข้าม Main Station เลย ลิฟต์ขึ้นโรงแรมอยู่ด้านข้างตึก (ทางเข้าเล็กหน่อย) ห้องพักสะอาดแต่กะทัดรัดสไตล์ไทเป",
-        googleMapsQuery: "Mayer Inn Taipei"
+        googleMapsQuery: "美爵旅店 Mayer Inn Taipei Station"
       },
       {
         coords: [25.0422, 121.5067], type: "cafe", title: "Fong Da Coffee",
@@ -84,19 +84,19 @@ export const locations: LocationsData = {
         coords: [25.0432, 121.5082], type: "shopping", title: "Don Don Donki",
         desc: "ห้างดองกี้ 24 ชม.",
         review: "สาขานี้ใหญ่มาก! ชั้น 2 มีโซนอาหารปรุงสุกพร้อมทาน ถ้าหิวรอบดึกแวะมาได้เลย ของฝากพวกขนมญี่ปุ่นราคาบางอย่างถูกกว่าไทยเยอะ",
-        googleMapsQuery: "Don Don Donki Ximending Taipei"
+        googleMapsQuery: "唐吉訶德 Don Don Donki Ximending Taipei"
       },
       {
         coords: [25.0420, 121.5078], type: "photo", title: "ทางม้าลายสายรุ้ง",
         desc: "จุดถ่ายรูปหน้า MRT Ximen ทางออก 6",
         review: "แลนด์มาร์คยอดฮิต! ถ้าอยากได้รูปสวยคนน้อยให้มาเช้าๆ หรือถ่ายตอนกลางคืนไปเลย ระวังรถด้วยเพราะเป็นถนนใช้งานจริง",
-        googleMapsQuery: "Ximending Rainbow Crosswalk Taipei"
+        googleMapsQuery: "西門町彩虹斑馬線 Ximending Rainbow Crosswalk Taipei"
       },
       {
         coords: [25.0464, 121.5169], type: "hotel", title: "กลับที่พัก",
         desc: "พักผ่อน",
         review: "เดินกลับจากซีเหมินติงมาโรงแรมใช้เวลาประมาณ 15 นาที ถือว่าเดินย่อยอาหาร หรือถ้านั่ง Uber ก็ประมาณ 80-100 TWD สะดวกดี",
-        googleMapsQuery: "Mayer Inn Taipei"
+        googleMapsQuery: "美爵旅店 Mayer Inn Taipei Station"
       }
     ]
   },
@@ -106,7 +106,7 @@ export const locations: LocationsData = {
       {
         coords: [25.0464, 121.5169], type: "hotel", title: "เริ่ม: Mayer Inn", desc: "08:00 ออกเดินทาง",
         review: "เตรียมขวดน้ำเปล่าไปด้วย วันนี้เดินเยอะ! (น้ำประปาที่ไต้หวันดื่มไม่ได้ แต่ตามสถานี MRT มีตู้กดน้ำฟรี)",
-        googleMapsQuery: "Mayer Inn Taipei"
+        googleMapsQuery: "美爵旅店 Mayer Inn Taipei Station"
       },
       {
         coords: [25.0372, 121.4994], type: "temple", title: "วัดหลงซาน", desc: "ไหว้พระขอพรเช้า",
@@ -171,7 +171,7 @@ export const locations: LocationsData = {
       {
         coords: [25.0464, 121.5169], type: "hotel", title: "กลับที่พัก", desc: "จบทริปวันที่ 2",
         review: "จากตลาดหนิงเซี่ย นั่ง Uber กลับโรงแรมประมาณ 100 TWD หรือจะเดินประมาณ 15-20 นาทีก็ได้ ถือว่าเดินย่อย",
-        googleMapsQuery: "Mayer Inn Taipei"
+        googleMapsQuery: "美爵旅店 Mayer Inn Taipei Station"
       }
     ]
   },
@@ -181,12 +181,12 @@ export const locations: LocationsData = {
       {
         coords: [25.0464, 121.5169], type: "hotel", title: "เริ่ม: Mayer Inn", desc: "เช้า: เดินไปสถานีรถไฟ",
         review: "วันนี้ออกนอกเมือง พกร่ม/เสื้อกันฝนติดตัวไปด้วยเสมอ! เมือง Keelung และ Jiufen ฝนตกบ่อยมาก (Rainy City)",
-        googleMapsQuery: "Mayer Inn Taipei"
+        googleMapsQuery: "美爵旅店 Mayer Inn Taipei Station"
       },
       {
         coords: [25.0478, 121.5170], type: "transit", title: "Taipei Main Station", desc: "ขึ้นรถไฟ TRA ไป Keelung",
         review: "ใช้บัตร EasyCard แตะเข้ารถไฟ TRA ได้เลย (เหมือนขึ้น BTS) ไม่ต้องจองตั๋ว ให้ดูป้ายรถไฟที่เขียนว่าไป 'Keelung' (Local Train) นั่งยาวๆ 45 นาที",
-        googleMapsQuery: "Taipei Main Station Taiwan"
+        googleMapsQuery: "台北車站 Taipei Main Station Taiwan"
       },
       {
         coords: [25.1310, 121.7393], type: "city", title: "สถานี Keelung", desc: "ถึงเมืองท่าจีหลง",
@@ -231,12 +231,12 @@ export const locations: LocationsData = {
       {
         coords: [25.0478, 121.5170], type: "transit", title: "กลับไทเป", desc: "รถบัส 965",
         review: "ขากลับคิวรถบัสยาวมาก! แนะนำให้มารอก่อน 19:00 หรือถ้ารอนานเกินไป ให้นั่งรถเมล์ลงไปสถานีรถไฟ Ruifang แล้วนั่งรถไฟกลับไทเปจะเร็วกว่า",
-        googleMapsQuery: "Taipei Main Station Taiwan"
+        googleMapsQuery: "台北車站 Taipei Main Station Taiwan"
       },
       {
         coords: [25.0464, 121.5169], type: "hotel", title: "ที่พัก", desc: "พักผ่อน",
         review: "กลับถึงห้อง แนะนำให้แช่เท้าด้วยน้ำอุ่น วันนี้เดินขึ้นลงเขาเยอะ พรุ่งนี้จะได้ไม่ปวดขา",
-        googleMapsQuery: "Mayer Inn Taipei"
+        googleMapsQuery: "美爵旅店 Mayer Inn Taipei Station"
       }
     ]
   },
@@ -246,7 +246,7 @@ export const locations: LocationsData = {
       {
         coords: [25.0464, 121.5169], type: "hotel", title: "Check-out", desc: "ฝากกระเป๋า",
         review: "Check-out และฝากกระเป๋าไว้ที่โรงแรมได้เลย (ฟรี) จะได้เดินตัวปลิวช้อปปิ้งของฝากรอบสุดท้าย",
-        googleMapsQuery: "Mayer Inn Taipei"
+        googleMapsQuery: "美爵旅店 Mayer Inn Taipei Station"
       },
       {
         coords: [25.0457, 121.5138], type: "food", title: "ก๋วยเตี๋ยวเนื้อ Liu Shan Dong", desc: "มื้อเช้า (มิชลิน)",
@@ -256,7 +256,7 @@ export const locations: LocationsData = {
       {
         coords: [25.0452, 121.5142], type: "cafe", title: "Heritage Bakery", desc: "ร้านกาแฟเก๋ๆ",
         review: "ร้านเบเกอรี่สไตล์อเมริกันผสมไต้หวัน ขนมเค้กอร่อยมาก โดยเฉพาะ Cinnamon Roll และ Carrot Cake บรรยากาศร้านถ่ายรูปสวย",
-        googleMapsQuery: "Heritage Bakery & Cafe Taipei"
+        googleMapsQuery: "Heritage Bakery & Cafe 台北市中正區"
       },
       {
         coords: [25.0480, 121.5168], type: "food", title: "Carrispy Donuts", desc: "โดนัทนมสดทอด",
@@ -271,17 +271,17 @@ export const locations: LocationsData = {
       {
         coords: [25.0464, 121.5169], type: "hotel", title: "รับกระเป๋า", desc: "ที่โรงแรม",
         review: "กลับมารับกระเป๋า จัดของให้เรียบร้อย เตรียม Passport ไว้ให้หยิบง่ายๆ สำหรับเดินทางไปสนามบิน",
-        googleMapsQuery: "Mayer Inn Taipei"
+        googleMapsQuery: "美爵旅店 Mayer Inn Taipei Station"
       },
       {
         coords: [25.0600, 121.3500], type: "transit", title: "ไปสนามบิน", desc: "Airport MRT",
         review: "นั่งรถไฟสายสีม่วง (Express) เหมือนขามา ใช้เวลา 35 นาที เผื่อเวลาให้ถึงสนามบินก่อนเครื่องออกสัก 2.5 - 3 ชม. นะ",
-        googleMapsQuery: "Taoyuan Airport MRT Taipei"
+        googleMapsQuery: "桃園機場捷運 Taoyuan Airport MRT A1 Taipei Main Station"
       },
       {
         coords: [25.0797, 121.2342], type: "airport", title: "กลับบ้าน", desc: "13:50 Flight Departure",
         review: "Tax Refund ทำที่ Kiosk ก่อนเช็คอินได้เลย ใน Gate มีร้านของฝากอีกเพียบ ถ้าลืมซื้ออะไรมาเก็บตกที่นี่ได้ (แต่ราคาอาจสูงกว่าข้างนอกนิดหน่อย)",
-        googleMapsQuery: "Taoyuan International Airport Taiwan"
+        googleMapsQuery: "桃園國際機場 Taoyuan International Airport Taiwan"
       }
     ]
   }
