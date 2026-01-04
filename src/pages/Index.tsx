@@ -734,12 +734,28 @@ const Index = () => {
                     <MissionCheckbox id="d2-trending-1" />
                     <span className={checkedItems.has('d2-trending-1') ? 'line-through opacity-60' : ''}>
                       🔥 <strong>ซีอิ๊วราเมน (Soy Sauce Ramen):</strong> ย่าน Zhongshan/Datong มีร้านราเมนเล็กๆ เปิดใหม่เยอะมาก รสชาติกลมกล่อมไม่เลี่ยน
+                      <MapLink 
+                        title="Soy Sauce Ramen Zhongshan" 
+                        description="ราเมนซีอิ๊วย่าน Zhongshan/Datong"
+                        googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Soy+Sauce+Ramen+Zhongshan+Taipei"
+                        day={2}
+                        stopIndex={0}
+                        color="#e11d48"
+                      />
                     </span>
                   </li>
                   <li data-mission className="pl-6 relative text-sm" style={{ color: 'hsl(350 80% 35%)' }}>
                     <MissionCheckbox id="d2-trending-2" />
                     <span className={checkedItems.has('d2-trending-2') ? 'line-through opacity-60' : ''}>
                       🔥 <strong>ข้าวหน้าหมูตุ๋นสูตรแห้ง (Dry Braised Pork Rice):</strong> ไม่ราดน้ำเยอะแบบโบราณ เน้นหมูตุ๋นเข้มข้น เทรนด์ใหม่ที่กำลังมาแรง
+                      <MapLink 
+                        title="Dry Braised Pork Rice" 
+                        description="ข้าวหน้าหมูตุ๋นสูตรแห้ง"
+                        googleMapsUrl="https://www.google.com/maps/search/?api=1&query=滷肉飯+Braised+Pork+Rice+Taipei"
+                        day={2}
+                        stopIndex={0}
+                        color="#e11d48"
+                      />
                     </span>
                   </li>
                 </ul>
@@ -979,8 +995,28 @@ const Index = () => {
                 <div className="font-bold text-muted-foreground mb-2">🌙 Plan B: Local Crowd (เผื่อคนแน่น)</div>
                 <p className="text-sm text-muted-foreground mb-2">ถ้า Ningxia คนเยอะจนเดินไม่ได้ แนะนำตลาดเหล่านี้:</p>
                 <ul className="list-none p-0 m-0 space-y-1">
-                  <li className="text-sm">• <strong>Shuangcheng Street Night Market:</strong> ตลาดเล็กๆ คนท้องถิ่นล้วน</li>
-                  <li className="text-sm">• <strong>Yansan Night Market:</strong> สายกินจริงจังต้องที่นี่</li>
+                  <li className="text-sm">
+                    • <strong>Shuangcheng Street Night Market:</strong> ตลาดเล็กๆ คนท้องถิ่นล้วน
+                    <MapLink 
+                      title="Shuangcheng Street Night Market" 
+                      description="ตลาดกลางคืนคนท้องถิ่น"
+                      googleMapsUrl="https://www.google.com/maps/search/?api=1&query=雙城街夜市+Shuangcheng+Street+Night+Market+Taipei"
+                      day={2}
+                      stopIndex={12}
+                      color="#6b7280"
+                    />
+                  </li>
+                  <li className="text-sm">
+                    • <strong>Yansan Night Market:</strong> สายกินจริงจังต้องที่นี่
+                    <MapLink 
+                      title="Yansan Night Market" 
+                      description="ตลาดกลางคืนสำหรับสายกิน"
+                      googleMapsUrl="https://www.google.com/maps/search/?api=1&query=延三夜市+Yansan+Night+Market+Taipei"
+                      day={2}
+                      stopIndex={12}
+                      color="#6b7280"
+                    />
+                  </li>
                 </ul>
               </div>
             </div>
@@ -1339,7 +1375,18 @@ const Index = () => {
               </li>
               <li data-mission className={`bg-amber-50 border-2 border-dashed border-amber-400 p-3 rounded-lg mb-3 ${checkedItems.has('d4-shop-luchinshu') ? 'opacity-60' : ''}`}>
                 <MissionCheckbox id="d4-shop-luchinshu" />
-                <div className="font-extrabold text-amber-800">🌟 Luchinshu (盧琴樹) - ขนมปังตังเม & บิสกิตชีส</div>
+                <div className="font-extrabold text-amber-800">
+                  🌟 Luchinshu (盧琴樹) - ขนมปังตังเม & บิสกิตชีส
+                  <MapLink 
+                    title="Luchinshu 盧琴樹" 
+                    description="ขนมปังตังเม & บิสกิตชีส"
+                    hours="10:00-22:00"
+                    googleMapsUrl="https://www.google.com/maps/search/?api=1&query=盧琴樹+Luchinshu+Taipei+Station"
+                    day={4}
+                    stopIndex={3}
+                    color="#d97706"
+                  />
+                </div>
                 <div className="text-sm mt-1">
                   👉 <b>Breeze Taipei Station ชั้น 2:</b> 10:00-22:00<br />
                   👉 <b>Eslite Underground (B1):</b> 10:30-22:00
