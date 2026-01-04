@@ -223,15 +223,12 @@ const TravelMap = () => {
               </div>
             )}
             
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedPoint.googleMapsQuery || selectedPoint.title + ' Taipei Taiwan')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-2xl text-white font-bold"
-              style={{ backgroundColor: selectedPoint.color }}
+            <button
+              onClick={handleBackToHome}
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-2xl text-white font-bold bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 transition-all"
             >
-              <MapPin className="w-4 h-4" /> นำทาง (Google Maps)
-            </a>
+              <ArrowLeft className="w-4 h-4" /> กลับหน้าแรก
+            </button>
           </div>
         </div>
       )}
