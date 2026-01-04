@@ -36,7 +36,8 @@ const NavigationPopup = ({
     sessionStorage.setItem('lastClickedDay', day.toString());
     sessionStorage.setItem('lastClickedStop', stopIndex.toString());
     sessionStorage.setItem('lastClickedTitle', title);
-    navigate(`/map?day=${day}&stop=${stopIndex}`);
+    // ใช้ hash-based navigation
+    window.location.hash = `/map?day=${day}&stop=${stopIndex}`;
   };
 
   const handleOpenGoogleMaps = () => {
