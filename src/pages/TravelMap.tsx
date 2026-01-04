@@ -10,6 +10,7 @@ const TravelMap = () => {
   const navigate = useNavigate();
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
+  const markersRef = useRef<L.Marker[]>([]);
   const [currentDay, setCurrentDay] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedPoint, setSelectedPoint] = useState<any>(null);
@@ -66,10 +67,14 @@ const TravelMap = () => {
     const latlngs = data.points.map(p => p.coords as [number, number]);
     L.polyline(latlngs, { color: data.color, weight: 4, opacity: 0.8, dashArray: '8, 8' }).addTo(map);
 
+    // Clear old markers
+    markersRef.current = [];
+
     // Add markers
     data.points.forEach((point, index) => {
+      const isSelected = focusStop === index;
       const icon = L.divIcon({
-        html: `<div style="background:${data.color}; width:36px; height:36px; border-radius:50%; border:3px solid white; display:flex; align-items:center; justify-content:center; color:white; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">
+        html: `<div class="map-marker ${isSelected ? 'marker-selected' : ''}" style="background:${data.color}; width:36px; height:36px; border-radius:50%; border:3px solid white; display:flex; align-items:center; justify-content:center; color:white; font-size:14px; box-shadow:${isSelected ? `0 0 0 4px ${data.color}40, 0 0 20px ${data.color}80` : '0 2px 8px rgba(0,0,0,0.3)'};">
           ${getIconEmoji(point.type)}
         </div>`,
         className: '',
@@ -78,13 +83,17 @@ const TravelMap = () => {
       });
 
       const marker = L.marker(point.coords as [number, number], { icon }).addTo(map);
+      markersRef.current.push(marker);
+      
       marker.on('click', () => {
+        updateMarkerStyles(index, data.color);
         setSelectedPoint({ ...point, index, color: data.color });
         map.panTo(point.coords as [number, number]);
       });
 
       if (focusStop === index) {
         setTimeout(() => {
+          updateMarkerStyles(index, data.color);
           setSelectedPoint({ ...point, index, color: data.color });
           map.flyTo(point.coords as [number, number], 16, { duration: 1 });
         }, 500);
@@ -101,6 +110,34 @@ const TravelMap = () => {
       photo: '📸', art: '🎨', sea: '🌊', tea: '🍵', city: '🏙️'
     };
     return icons[type] || '📍';
+  };
+
+  const updateMarkerStyles = (selectedIndex: number, color: string) => {
+    const data = locations[`day${currentDay}`];
+    if (!data) return;
+
+    markersRef.current.forEach((marker, index) => {
+      const point = data.points[index];
+      const isSelected = index === selectedIndex;
+      const icon = L.divIcon({
+        html: `<div class="map-marker ${isSelected ? 'marker-selected' : ''}" style="background:${color}; width:36px; height:36px; border-radius:50%; border:3px solid white; display:flex; align-items:center; justify-content:center; color:white; font-size:14px; box-shadow:${isSelected ? `0 0 0 4px ${color}40, 0 0 20px ${color}80` : '0 2px 8px rgba(0,0,0,0.3)'}; ${isSelected ? 'animation: pulse-ring 1.5s ease-out infinite;' : ''}">
+          ${getIconEmoji(point.type)}
+        </div>`,
+        className: '',
+        iconSize: [36, 36],
+        iconAnchor: [18, 18]
+      });
+      marker.setIcon(icon);
+    });
+  };
+
+  const handleBackToHome = () => {
+    // Save scroll position info
+    sessionStorage.setItem('lastViewedDay', currentDay.toString());
+    if (selectedPoint) {
+      sessionStorage.setItem('lastViewedStop', selectedPoint.index.toString());
+    }
+    navigate('/');
   };
 
   const handleDayChange = (day: number) => {
@@ -123,10 +160,10 @@ const TravelMap = () => {
               🇹🇼 บันทึกเที่ยวไทเป
             </h1>
             <button
-              onClick={() => navigate('/')}
-              className="flex items-center gap-1 text-sm text-muted-foreground bg-muted px-3 py-1.5 rounded-xl hover:bg-muted/80"
+              onClick={handleBackToHome}
+              className="flex items-center gap-1.5 text-sm font-bold text-white bg-gradient-to-r from-pink-500 to-rose-500 px-4 py-2 rounded-xl hover:from-pink-600 hover:to-rose-600 shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
-              <ArrowLeft className="w-4 h-4" /> กลับ
+              <ArrowLeft className="w-4 h-4" /> กลับหน้าแรก
             </button>
           </div>
           <div className="flex gap-2 overflow-x-auto pb-1">

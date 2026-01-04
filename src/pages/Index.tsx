@@ -20,6 +20,22 @@ const Index = () => {
     if (saved) {
       setCheckedItems(new Set(JSON.parse(saved)));
     }
+
+    // Restore scroll position if coming back from map
+    const lastDay = sessionStorage.getItem('lastViewedDay');
+    const lastStop = sessionStorage.getItem('lastViewedStop');
+    
+    if (lastDay) {
+      setTimeout(() => {
+        const dayElement = document.getElementById(`day${lastDay}`);
+        if (dayElement) {
+          dayElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        // Clear after scrolling
+        sessionStorage.removeItem('lastViewedDay');
+        sessionStorage.removeItem('lastViewedStop');
+      }, 100);
+    }
   }, []);
 
   const toggleCheck = (id: string) => {
