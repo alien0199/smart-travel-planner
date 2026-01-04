@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/", // เปลี่ยนเป็นชื่อ repo เช่น "/taipei-trip-2026/" เมื่อ deploy GitHub Pages
+  base: "/smart-travel-planner/",
   server: {
     host: "::",
     port: 8080,
