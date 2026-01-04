@@ -1,12 +1,895 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from 'react';
+import { Check } from 'lucide-react';
+import StickyNav from '@/components/StickyNav';
+import MissionHUD from '@/components/MissionHUD';
+import MapLink from '@/components/MapLink';
+import { locations } from '@/types/locations';
 
 const Index = () => {
+  const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
+  const [totalItems, setTotalItems] = useState(0);
+
+  useEffect(() => {
+    // Count all checkable items
+    let count = 0;
+    document.querySelectorAll('[data-mission]').forEach(() => count++);
+    setTotalItems(count);
+
+    // Load saved state
+    const saved = localStorage.getItem('tripChecked');
+    if (saved) {
+      setCheckedItems(new Set(JSON.parse(saved)));
+    }
+  }, []);
+
+  const toggleCheck = (id: string) => {
+    const newChecked = new Set(checkedItems);
+    if (newChecked.has(id)) {
+      newChecked.delete(id);
+    } else {
+      newChecked.add(id);
+    }
+    setCheckedItems(newChecked);
+    localStorage.setItem('tripChecked', JSON.stringify([...newChecked]));
+  };
+
+  const MissionCheckbox = ({ id }: { id: string }) => (
+    <span
+      onClick={(e) => {
+        e.stopPropagation();
+        toggleCheck(id);
+      }}
+      className={`inline-block w-5 h-5 rounded-md border-2 mr-2 cursor-pointer flex-shrink-0 relative top-1 transition-all ${
+        checkedItems.has(id)
+          ? 'bg-taiwan-green border-taiwan-green'
+          : 'bg-white border-muted-foreground/30'
+      }`}
+    >
+      {checkedItems.has(id) && (
+        <Check className="w-4 h-4 text-white absolute top-0 left-0.5" strokeWidth={3} />
+      )}
+    </span>
+  );
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen" style={{ paddingTop: 'calc(var(--nav-height) + 20px)', paddingBottom: '100px' }}>
+      <StickyNav />
+
+      {/* TRIP TIPS */}
+      <div id="tips" className="day-wrapper mt-5">
+        <div className="text-center py-6 px-5 text-white" style={{ background: 'linear-gradient(90deg, #4f46e5, #818cf8)' }}>
+          <h2 className="m-0 font-extrabold text-xl">🚀 TRIP ESSENTIALS & PRO TIPS</h2>
+          <p className="mt-1 opacity-90">เตรียมตัวให้พร้อมก่อนลุยไทเป</p>
+        </div>
+        <div className="p-6">
+          <div className="tip-box" style={{ background: 'hsl(152 81% 96%)', borderColor: 'hsl(151 81% 71%)' }}>
+            <div className="font-extrabold text-lg mb-2 text-taiwan-green flex items-center gap-2">
+              📝 Online Arrival Card (Update 2026)
+            </div>
+            <p className="text-sm mb-2 text-emerald-900">
+              เนื่องจาก <b>Taiwan Lucky Land จบแคมเปญแล้ว</b> สิ่งที่ควรทำแทนคือ "กรอกใบ ตม. ออนไลน์" ล่วงหน้า (1-30 วันก่อนบิน) เพื่อความรวดเร็วในการเข้าเมืองครับ
+            </p>
+            <a href="https://niaspeedy.immigration.gov.tw/webacard/" target="_blank" rel="noopener noreferrer" className="underline text-taiwan-green font-bold text-sm">
+              👉 กรอก Arrival Card ที่นี่
+            </a>
+          </div>
+          <ul className="list-none p-0 m-0 mt-4 space-y-2">
+            <li data-mission className="pl-6 relative text-sm">
+              <MissionCheckbox id="tip-1" />
+              <span className={checkedItems.has('tip-1') ? 'line-through opacity-60' : ''}>
+                💡 <strong>EasyCard (Yoyo Card):</strong> บัตรเดียวเที่ยวทั่วไทย(เป) ใช้ขึ้นรถไฟ, รถเมล์, ซื้อของ 7-11. ซื้อได้ที่สนามบินหรือสถานีรถไฟ
+              </span>
+            </li>
+            <li data-mission className="pl-6 relative text-sm">
+              <MissionCheckbox id="tip-2" />
+              <span className={checkedItems.has('tip-2') ? 'line-through opacity-60' : ''}>
+                💡 <strong>Receipt Lottery:</strong> ใบเสร็จทุกใบในไต้หวันมีค่า! มันคือลอตเตอรี่ อย่าเพิ่งทิ้ง เผื่อตรวจรางวัลได้
+              </span>
+            </li>
+            <li data-mission className="pl-6 relative text-sm">
+              <MissionCheckbox id="tip-3" />
+              <span className={checkedItems.has('tip-3') ? 'line-through opacity-60' : ''}>
+                💡 <strong>Rain Gear:</strong> ไทเปฝนตกบ่อยมาก พกร่มพับที่แข็งแรงหรือเสื้อกันฝนติดกระเป๋าไว้เสมอ
+              </span>
+            </li>
+            <li data-mission className="pl-6 relative text-sm">
+              <MissionCheckbox id="tip-4" />
+              <span className={checkedItems.has('tip-4') ? 'line-through opacity-60' : ''}>
+                💡 <strong>Uber:</strong> ถ้ามากัน 3-4 คน บางครั้งนั่ง Uber คุ้มกว่าและสะดวกกว่ารถไฟฟ้าครับ
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
+
+      {/* DAY 1 */}
+      <div id="day1" className="day-wrapper">
+        <div className="text-center py-10 px-5 text-white relative" style={{ background: 'linear-gradient(135deg, #2563eb 30%, #db2777 100%)' }}>
+          <h1 className="m-0 font-extrabold text-2xl tracking-wide" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
+            🇹🇼 TAIPEI TRIP 2026: DAY 1
+          </h1>
+          <h2 className="mt-2 font-semibold text-xl">🛬 Arrival & West Side (เดินทางถึง & ฝั่งตะวันตก)</h2>
+          <div className="flex justify-center gap-5 mt-6">
+            <span className="info-badge">🗓️ Date: 30 Jan 2026 (Fri)</span>
+          </div>
+        </div>
+
+        <div className="p-8" style={{ background: 'hsl(210 40% 98%)' }}>
+          {/* Journey Section */}
+          <div className="rounded-2xl border-4 border-day1 overflow-hidden mb-4" style={{ background: 'hsl(217 91% 97%)' }}>
+            <div className="py-4 px-6 flex items-center text-white" style={{ background: 'linear-gradient(90deg, #2563eb, #1d4ed8)' }}>
+              <h3 className="m-0 font-extrabold text-lg flex items-center gap-3">
+                ✈️ THE JOURNEY (เส้นทางการเดินทาง)
+              </h3>
+            </div>
+            <div className="p-6">
+              {/* Timeline */}
+              <div className="space-y-6">
+                {/* Step 1 */}
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-day1 text-white flex items-center justify-center text-xl flex-shrink-0 shadow-md">
+                    🛫
+                  </div>
+                  <div className="flex-1 bg-white p-4 rounded-xl border-l-4 border-day1 shadow-sm">
+                    <span className="font-extrabold text-day1">10:55 น.</span>
+                    <div className="font-bold mt-1">
+                      Suvarnabhumi Airport 
+                      <MapLink 
+                        title="Suvarnabhumi Airport" 
+                        description="จุดเริ่มต้นการเดินทาง"
+                        googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Airport"
+                        day={1}
+                        stopIndex={0}
+                        color="#2563eb"
+                      />
+                    </div>
+                    <p className="text-muted-foreground text-sm mt-1">Flight Departure (ออกเดินทาง)</p>
+                  </div>
+                </div>
+                <div className="text-center text-day1 text-2xl ml-6">⬇️</div>
+
+                {/* Step 2 */}
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-day1 text-white flex items-center justify-center text-xl flex-shrink-0 shadow-md">
+                    🛬
+                  </div>
+                  <div className="flex-1 bg-white p-4 rounded-xl border-l-4 border-day1 shadow-sm">
+                    <span className="font-extrabold text-day1">15:25 น.</span>
+                    <div className="font-bold mt-1">
+                      Taoyuan International Airport 
+                      <MapLink 
+                        title="Taoyuan International Airport" 
+                        description="ผ่าน ตม. & รับกระเป๋า"
+                        review={locations.day1.points[0].review}
+                        googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Taoyuan+International+Airport"
+                        day={1}
+                        stopIndex={0}
+                        color="#2563eb"
+                      />
+                    </div>
+                    <p className="text-muted-foreground text-sm mt-1">ผ่าน ตม. & รับกระเป๋า (กรอก Arrival Card ออนไลน์มาจะไวมาก)</p>
+                  </div>
+                </div>
+                <div className="text-center text-day1 text-2xl ml-6">⬇️</div>
+
+                {/* Step 3 */}
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-day1 text-white flex items-center justify-center text-xl flex-shrink-0 shadow-md">
+                    🚆
+                  </div>
+                  <div className="flex-1 bg-white p-4 rounded-xl border-l-4 border-day1 shadow-sm">
+                    <span className="font-extrabold text-day1">Airport Express Train</span>
+                    <div className="font-bold mt-1">เข้าสู่ตัวเมือง</div>
+                    <p className="text-muted-foreground text-sm mt-1">นั่งรถไฟสายสีม่วงจาก Airport มุ่งหน้าสู่ Main Station</p>
+                  </div>
+                </div>
+                <div className="text-center text-day1 text-2xl ml-6">⬇️</div>
+
+                {/* Step 4 */}
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-day1 text-white flex items-center justify-center text-xl flex-shrink-0 shadow-md">
+                    🏨
+                  </div>
+                  <div className="flex-1 bg-white p-4 rounded-xl border-l-4 border-day1 shadow-sm">
+                    <span className="font-extrabold text-day1">Check-in</span>
+                    <div className="font-bold mt-1">
+                      Mayer Inn Hotel 
+                      <MapLink 
+                        title="Mayer Inn Hotel" 
+                        description="Check-in เก็บกระเป๋า"
+                        review={locations.day1.points[3].review}
+                        googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Mayer+Inn+Taipei"
+                        day={1}
+                        stopIndex={3}
+                        color="#2563eb"
+                      />
+                    </div>
+                    <p className="text-muted-foreground text-sm mt-1">เก็บกระเป๋า พักผ่อนชั่วคราว เตรียมตัวลุย!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="path-connector">
+            <div className="path-arrow-box">⬇️ เตรียมตัวลุยย่านฮิตยามค่ำคืน... ⬇️</div>
+          </div>
+
+          {/* Ximending Section */}
+          <div className="rounded-2xl border-4 border-taiwan-pink overflow-hidden" style={{ background: 'hsl(327 73% 97%)' }}>
+            <div className="py-4 px-6 text-white" style={{ background: 'linear-gradient(90deg, #db2777, #be185d)' }}>
+              <h3 className="m-0 font-extrabold text-lg">
+                🌆 DESTINATION: XIMENDING (ซีเหมินติง) <span className="text-sm opacity-90 ml-2">📍 Wanhua District</span>
+              </h3>
+            </div>
+
+            <div className="embed-map-container mx-6 mt-4">
+              <iframe 
+                src="https://maps.google.com/maps?q=Ximending+Taipei&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full border-0"
+                title="Ximending Map"
+              />
+            </div>
+
+            <div className="p-6">
+              {/* Vintage Cafe */}
+              <div className="vintage-box mt-0">
+                <div className="font-extrabold text-amber-800 flex items-center gap-2 mb-2">
+                  <span className="bg-taiwan-orange text-white text-xs py-0.5 px-2 rounded">VINTAGE CAFE</span>
+                  จิบกาแฟร้านคลาสสิก (Coffee Stop)
+                </div>
+                <ul className="list-none p-0 m-0 space-y-2">
+                  <li data-mission className="pl-6 relative text-sm text-amber-900">
+                    <MissionCheckbox id="d1-cafe-1" />
+                    <span className={checkedItems.has('d1-cafe-1') ? 'line-through opacity-60' : ''}>
+                      ☕ <strong>Bee Dao Café (Fong Da Coffee):</strong> ร้านกาแฟเก่าแก่ 60+ ปี บรรยากาศวินเทจแท้ๆ แวะจิบกาแฟหรือซื้อคุกกี้
+                      <MapLink 
+                        title="Fong Da Coffee" 
+                        description="ร้านกาแฟวินเทจ 60+ ปี"
+                        review={locations.day1.points[4].review}
+                        googleMapsUrl="https://www.google.com/maps/search/Fong+Da+Coffee+Taipei"
+                        day={1}
+                        stopIndex={4}
+                        color="#f97316"
+                      />
+                    </span>
+                  </li>
+                  <li data-mission className="pl-6 relative text-sm text-amber-900">
+                    <MissionCheckbox id="d1-cafe-2" />
+                    <span className={checkedItems.has('d1-cafe-2') ? 'line-through opacity-60' : ''}>
+                      ☕ <strong>Shang Shang Coffee (上上咖啡):</strong> ร้านกาแฟคลาสสิกใกล้อนุสรณ์สถานเจียงไคเช็ค เป็นที่นิยมของคนทำงานท้องถิ่น
+                      <MapLink 
+                        title="Shang Shang Coffee" 
+                        description="ร้านกาแฟคลาสสิกคนพื้นที่"
+                        googleMapsUrl="https://www.google.com/maps/search/Shang+Shang+Coffee+Taipei"
+                        day={1}
+                        stopIndex={4}
+                        color="#f97316"
+                      />
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Food Section */}
+              <div className="bg-white p-5 rounded-2xl shadow-sm mb-6">
+                <div className="font-extrabold text-taiwan-pink text-lg flex items-center gap-2 border-b-2 border-pink-200 pb-2 mb-4">
+                  🍜 FOOD ADVENTURE CHECKLIST (ตะลุยกิน)
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {[
+                    { id: 'd1-food-1', name: 'Ay-Chung Flour-Rice Noodle', desc: 'บะหมี่อาจง', hours: '08:30 - 23:00', review: locations.day1.points[5].review, stopIndex: 5 },
+                    { id: 'd1-food-2', name: 'Tian Tian Li (天天利)', desc: 'ข้าวหน้าหมูพะโล้', hours: '10:00 - 22:30', review: locations.day1.points[6].review, stopIndex: 6 },
+                    { id: 'd1-food-3', name: 'Xing Fu Tang', desc: 'ชานมไข่มุก', hours: '10:00 - 22:00', review: locations.day1.points[7].review, stopIndex: 7 },
+                    { id: 'd1-food-4', name: 'Three Brothers Tofu Pudding', desc: 'โทฟุพุดดิ้ง', hours: '11:00 - 23:00', review: locations.day1.points[9].review, stopIndex: 9 },
+                    { id: 'd1-food-5', name: 'Prince Cheese Potato', desc: 'มันบดชีสราดเยิ้ม', hours: '13:00 - 00:00' },
+                    { id: 'd1-food-6', name: 'Chengdu Starfruit Ice', desc: 'น้ำมะเฟืองโบราณ', hours: '12:00 - 22:00' },
+                    { id: 'd1-food-7', name: 'Bafang Dumpling', desc: 'เกี๊ยวซ่า', hours: '10:30 - 21:30' },
+                    { id: 'd1-food-8', name: 'Thank You Squid Stew', desc: 'ร้านซุปปลาหมึก', hours: '10:00 - 22:00' },
+                    { id: 'd1-food-9', name: 'Lao Tien Lu (老天祿滷味)', desc: 'พะโล้เย็น', hours: '09:30 - 22:00' },
+                    { id: 'd1-food-10', name: 'Snow King Ice Cream', desc: 'ไอติม 73 รส', hours: '12:00 - 20:00' },
+                    { id: 'd1-food-11', name: 'Taiwan Salted Chicken', desc: 'ร้านไก่ทอดเก่าแก่', hours: '12:00 - 00:30', review: locations.day1.points[8].review, stopIndex: 8 },
+                    { id: 'd1-food-12', name: 'Cheng Wei Zhen', desc: 'หมี่อี๊และของลวก', hours: '09:30 - 03:30' },
+                  ].map((item) => (
+                    <div key={item.id} data-mission className={`text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                      <MissionCheckbox id={item.id} />
+                      🍜 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                      <MapLink 
+                        title={item.name} 
+                        description={item.desc}
+                        hours={item.hours}
+                        review={item.review}
+                        googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' Ximending')}`}
+                        day={1}
+                        stopIndex={item.stopIndex || 5}
+                        color="#db2777"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Local Gem Box */}
+                <div className="local-gem-box mt-6">
+                  <div className="font-extrabold text-taiwan-green flex items-center gap-2 mb-2">
+                    <span className="bg-taiwan-green text-white text-xs py-0.5 px-2 rounded">LOCAL SECRET</span>
+                    ร้านลับฉบับคนพื้นที่ (Alternative Option)
+                  </div>
+                  <ul className="list-none p-0 m-0 space-y-2">
+                    <li data-mission className="pl-6 relative text-sm text-emerald-900">
+                      <MissionCheckbox id="d1-local-1" />
+                      <span className={checkedItems.has('d1-local-1') ? 'line-through opacity-60' : ''}>
+                        ★ <strong>Lao Wang Ji Beef Noodles (老王記牛肉麵):</strong> ร้านก๋วยเตี๋ยวเนื้อในตำนาน "ไม่มีป้ายหน้าร้าน" น้ำซุปเข้มข้น คนพื้นที่ต่อคิวเยอะมาก
+                        <MapLink 
+                          title="Lao Wang Ji Beef Noodles" 
+                          description="ก๋วยเตี๋ยวเนื้อในตำนาน"
+                          googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Lao+Wang+Ji+Beef+Noodles"
+                          day={1}
+                          stopIndex={5}
+                          color="#059669"
+                        />
+                      </span>
+                    </li>
+                    <li data-mission className="pl-6 relative text-sm text-emerald-900">
+                      <MissionCheckbox id="d1-local-2" />
+                      <span className={checkedItems.has('d1-local-2') ? 'line-through opacity-60' : ''}>
+                        ★ <strong>Wan Nian B1 Food Court (萬年商業大樓):</strong> ลงไปชั้นใต้ดินตึก Wan Nian มีร้าน "Lao Shandong" (มิชลิน) และร้านเทมปุระที่คนไทยไม่ค่อยรู้
+                        <MapLink 
+                          title="Wan Nian B1 Food Court" 
+                          description="ฟู้ดคอร์ทใต้ดินลับๆ"
+                          googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Wan+Nian+Building+Taipei"
+                          day={1}
+                          stopIndex={5}
+                          color="#059669"
+                        />
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Shopping Section */}
+              <div className="bg-white p-5 rounded-2xl shadow-sm mb-6">
+                <div className="font-extrabold text-taiwan-pink text-lg flex items-center gap-2 border-b-2 border-pink-200 pb-2 mb-4">
+                  🛍️ SHOPPING SPREE (ช้อปปิ้ง & ของฝาก)
+                </div>
+                
+                <span className="font-bold text-taiwan-pink block mb-2">💄 Cosmetics & Drugstores:</span>
+                <ul className="list-none p-0 m-0 space-y-2 mb-4">
+                  {[
+                    { id: 'd1-shop-1', name: 'S3 Beauty (小三美日)', desc: 'คสอ. ราคาถูก', hours: '12:00 - 22:30' },
+                    { id: 'd1-shop-2', name: 'Watsons (屈臣氏)', desc: 'สาขาใหญ่ (24 ชม.)', hours: '24 Hours' },
+                    { id: 'd1-shop-3', name: 'POYA (寶雅)', desc: 'ร้านขายของใช้/คสอ.', hours: '10:00 - 22:30' },
+                  ].map((item) => (
+                    <li key={item.id} data-mission className={`pl-6 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                      <MissionCheckbox id={item.id} />
+                      🛒 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                      <MapLink 
+                        title={item.name} 
+                        description={item.desc}
+                        hours={item.hours}
+                        googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' Ximending')}`}
+                        day={1}
+                        stopIndex={10}
+                        color="#db2777"
+                      />
+                    </li>
+                  ))}
+                </ul>
+
+                <span className="font-bold text-taiwan-pink block mb-2">🛒 Supermarkets & Marts:</span>
+                <ul className="list-none p-0 m-0 space-y-2 mb-4">
+                  {[
+                    { id: 'd1-mart-1', name: 'Simple Mart', desc: 'ซูเปอร์เล็กๆ', hours: '07:30 - 23:00' },
+                    { id: 'd1-mart-2', name: 'PX Mart (全聯)', desc: 'ซูเปอร์มาร์เก็ต', hours: '08:00 - 23:00' },
+                    { id: 'd1-mart-3', name: 'Don Don Donki', desc: 'ห้างญี่ปุ่น 24 ชม.', hours: '24 Hours', review: locations.day1.points[10].review, stopIndex: 10 },
+                  ].map((item) => (
+                    <li key={item.id} data-mission className={`pl-6 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                      <MissionCheckbox id={item.id} />
+                      🛒 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                      <MapLink 
+                        title={item.name} 
+                        description={item.desc}
+                        hours={item.hours}
+                        review={item.review}
+                        googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' Ximending')}`}
+                        day={1}
+                        stopIndex={item.stopIndex || 10}
+                        color="#db2777"
+                      />
+                    </li>
+                  ))}
+                </ul>
+
+                <span className="font-bold text-taiwan-pink block mb-2">🧸 Toys & Hobbies:</span>
+                <ul className="list-none p-0 m-0 space-y-2">
+                  {[
+                    { id: 'd1-toy-1', name: 'Wannian Commercial Building', desc: 'ห้างเก่าแก่ ซื้อรองเท้า ของเล่น', hours: '11:30 - 21:30' },
+                    { id: 'd1-toy-2', name: 'POP MART', desc: 'สวรรค์ของคนรัก Art Toy', hours: '11:00 - 22:30' },
+                  ].map((item) => (
+                    <li key={item.id} data-mission className={`pl-6 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                      <MissionCheckbox id={item.id} />
+                      🛒 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                      <MapLink 
+                        title={item.name} 
+                        description={item.desc}
+                        hours={item.hours}
+                        googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' Ximending')}`}
+                        day={1}
+                        stopIndex={10}
+                        color="#db2777"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Fashion Section */}
+              <div className="bg-white p-5 rounded-2xl shadow-sm">
+                <div className="font-extrabold text-taiwan-pink text-lg flex items-center gap-2 border-b-2 border-pink-200 pb-2 mb-4">
+                  👟 LOCAL FASHION (แฟชั่นไต้หวันราคาถูก)
+                </div>
+                <ul className="list-none p-0 m-0 space-y-2">
+                  {[
+                    { id: 'd1-fashion-1', name: 'Fu Fa Shoes (富發牌)', desc: 'รองเท้าผ้าใบแฮนด์เมด', hours: '12:00 - 22:30' },
+                    { id: 'd1-fashion-2', name: 'NET (Clothing)', desc: 'แบรนด์เสื้อผ้าแห่งชาติ', hours: '11:00 - 22:30' },
+                    { id: 'd1-fashion-3', name: '50% Fifty Percent', desc: 'เสื้อผ้าวัยรุ่น', hours: '12:00 - 23:00' },
+                  ].map((item) => (
+                    <li key={item.id} data-mission className={`pl-6 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                      <MissionCheckbox id={item.id} />
+                      👟 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                      <MapLink 
+                        title={item.name} 
+                        description={item.desc}
+                        hours={item.hours}
+                        googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' Ximending')}`}
+                        day={1}
+                        stopIndex={10}
+                        color="#db2777"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* DAY 2, 3, 4 content would continue similarly... */}
+      {/* For brevity, adding placeholder sections */}
+
+      {/* DAY 2 */}
+      <div id="day2" className="day-wrapper">
+        <div className="text-center py-10 px-5 text-white relative" style={{ background: 'linear-gradient(90deg, #22c55e, #a855f7, #f97316, #0ea5e9, #ef4444)' }}>
+          <div className="relative z-10">
+            <h1 className="m-0 font-extrabold text-2xl tracking-wide" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
+              🇹🇼 TAIPEI TRIP 2026: DAY 2
+            </h1>
+            <h2 className="mt-2 font-semibold text-xl">The Ultimate Loop: West ➔ North ➔ East</h2>
+            <div className="flex justify-center gap-5 mt-6 flex-wrap">
+              <span className="info-badge">🗓️ 31 Jan 2026 (Sat)</span>
+              <span className="info-badge">🗺️ Route: ตะวันตก สู่เหนือ และตะวันออก</span>
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+
+        <div className="p-8" style={{ background: 'hsl(210 40% 98%)' }}>
+          <div className="tip-box mb-5 p-4">
+            <div className="font-extrabold mb-2 text-primary flex items-center gap-2">🚲 Travel Tip: U-Bike</div>
+            <p className="m-0 text-sm">วันนี้ต้องเดินทางหลายจุด ถ้าระยะทางไม่ไกล (เช่นจากวัดหลงซานไป Bopiliao) แนะนำให้ลองเช่า <b>U-Bike</b> ปั่นชมเมืองดูครับ สะดวกและประหยัด</p>
+          </div>
+
+          {/* West Side Card */}
+          <div className="rounded-2xl border-4 border-taiwan-green overflow-hidden mb-4" style={{ background: 'hsl(138 76% 97%)' }}>
+            <div className="py-4 px-6 text-white" style={{ background: 'linear-gradient(135deg, #22c55e, #16a34a)' }}>
+              <h3 className="m-0 font-extrabold text-lg flex items-center gap-3">
+                <span className="w-9 h-9 rounded-full bg-white text-foreground flex items-center justify-center font-black text-lg shadow">1</span>
+                START: WEST SIDE (ฝั่งตะวันตก) <span className="text-sm opacity-90 ml-2">📍 Wanhua & Longshan Temple</span>
+              </h3>
+            </div>
+            <div className="embed-map-container mx-6 mt-0">
+              <iframe 
+                src="https://maps.google.com/maps?q=Longshan+Temple+Taipei&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full border-0"
+                title="Longshan Temple Map"
+              />
+            </div>
+            <div className="p-6">
+              {/* Activities */}
+              <div className="mb-4">
+                <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-2 mb-3">
+                  🏯 กิจกรรมหลัก:
+                </div>
+                <ul className="list-none p-0 m-0 space-y-2">
+                  <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d2-act-1') ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id="d2-act-1" />
+                    📍 <strong>Longshan Temple:</strong> ไหว้พระขอพรเช้า <span className="hours-tag">🕒 06:00 - 22:00</span>
+                    <MapLink 
+                      title="Longshan Temple" 
+                      description="ไหว้พระขอพรเช้า"
+                      review={locations.day2.points[1].review}
+                      googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Longshan+Temple"
+                      day={2}
+                      stopIndex={1}
+                      color="#22c55e"
+                    />
+                  </li>
+                  <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d2-act-2') ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id="d2-act-2" />
+                    📍 <strong>Bopiliao Historic Block:</strong> เดินเล่นย่านตึกเก่าแก่อิฐแดง บรรยากาศเงียบสงบ
+                    <MapLink 
+                      title="Bopiliao Historic Block" 
+                      description="ตึกอิฐแดงโบราณ"
+                      review={locations.day2.points[2].review}
+                      googleMapsUrl="https://www.google.com/maps/search/Bopiliao+Historic+Block"
+                      day={2}
+                      stopIndex={2}
+                      color="#22c55e"
+                    />
+                  </li>
+                </ul>
+              </div>
+              
+              {/* Food */}
+              <div>
+                <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-2 mb-3">
+                  🥢 ตะลุยกินย่านวัดหลงซาน:
+                </div>
+                <ul className="list-none p-0 m-0 space-y-2">
+                  {[
+                    { id: 'd2-food-1', name: 'Yuanfang Gua Bao', desc: 'เบอร์เกอร์หมู', hours: '11:30 - 20:00 (ปิดจันทร์)', review: locations.day2.points[3].review, stopIndex: 3 },
+                    { id: 'd2-food-2', name: 'Zhouji Meat Porridge', desc: 'ข้าวต้มหมูกรอบ', hours: '06:00 - 16:30', review: locations.day2.points[4].review, stopIndex: 4 },
+                    { id: 'd2-food-3', name: 'Xiao Nan Zhengji Tofu Pudding', desc: 'โทฟุพุดดิ้ง', hours: '09:00 - 20:00' },
+                    { id: 'd2-food-4', name: 'Long Du Ice Fruit', desc: 'น้ำแข็งไสโบราณ', hours: '11:30 - 22:00' },
+                    { id: 'd2-food-5', name: 'Fuzhou Yuan Zu Pepper Bun', desc: 'ซาลาเปาอบโอ่ง', hours: '10:00 - 18:30' },
+                  ].map((item) => (
+                    <li key={item.id} data-mission className={`pl-8 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                      <MissionCheckbox id={item.id} />
+                      🥢 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                      <MapLink 
+                        title={item.name} 
+                        description={item.desc}
+                        hours={item.hours}
+                        review={item.review}
+                        googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`}
+                        day={2}
+                        stopIndex={item.stopIndex || 3}
+                        color="#22c55e"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="path-connector">
+            <div className="path-line" />
+            <div className="path-arrow-box">⬇️ เชื่อมต่อสู่ตอนเหนือ ผ่านเส้นทางสายอาร์ต...</div>
+          </div>
+
+          {/* More day 2 content... */}
+          <p className="text-center text-muted-foreground py-8">📍 ดูรายละเอียดเพิ่มเติมและตำแหน่งในแผนที่ Interactive ด้านล่าง</p>
+        </div>
+      </div>
+
+      {/* DAY 3 */}
+      <div id="day3" className="day-wrapper">
+        <div className="text-center py-10 px-5 text-white" style={{ background: 'linear-gradient(135deg, #0ea5e9 30%, #059669 100%)' }}>
+          <h1 className="m-0 font-extrabold text-2xl tracking-wide">🇹🇼 TAIPEI TRIP 2026: DAY 3</h1>
+          <h2 className="mt-2 font-semibold text-xl">🌊 Mountain & Sea Adventure (ผจญภัยภูเขาและทะเล)</h2>
+          <div className="inline-flex justify-center gap-5 mt-5 bg-white/20 py-2 px-5 rounded-full">
+            <span>🗓️ 1 Feb 2026 (Sun)</span>
+            <span>📍 Route: Northeast Coast</span>
+          </div>
+        </div>
+
+        <div className="p-8">
+          <div className="tip-box mb-5 p-4" style={{ background: 'hsl(152 81% 96%)', borderColor: 'hsl(151 81% 71%)' }}>
+            <div className="font-extrabold mb-2 text-taiwan-green flex items-center gap-2">☔ Weather Warning</div>
+            <p className="m-0 text-sm text-emerald-900">เมือง Keelung และ Jiufen ได้ชื่อว่าเป็น "เมืองแห่งฝน" (Rainy City) อย่าลืมพกร่มและเสื้อกันฝนติดตัวไปด้วยเสมอนะครับ</p>
+          </div>
+
+          {/* Keelung Card */}
+          <div className="p-6 rounded-2xl border-4 border-taiwan-cyan mb-4" style={{ background: 'hsl(204 100% 97%)' }}>
+            <h3 className="mt-0 font-extrabold text-xl text-cyan-700 flex items-center gap-3">
+              🚆 STOP 1: มุ่งหน้าสู่เมืองท่าจีหลง (Keelung) <span className="bg-white/70 text-muted-foreground text-sm py-1 px-3 rounded ml-2">ช่วงเช้า - บ่าย</span>
+            </h3>
+            
+            <div className="embed-map-container">
+              <iframe 
+                src="https://maps.google.com/maps?q=Keelung+City&t=&z=12&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full border-0"
+                title="Keelung Map"
+              />
+            </div>
+
+            <div className="mb-4">
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-1 mb-3">
+                🌊 การเดินทาง & จุดชมวิว:
+              </div>
+              <ul className="list-none p-0 m-0 space-y-2">
+                <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d3-trans-1') ? 'line-through opacity-60' : ''}`}>
+                  <MissionCheckbox id="d3-trans-1" />
+                  🚆 เริ่มต้นที่ <b>Taipei Main Station</b> นั่งรถไฟ TRA มุ่งหน้าสู่เมือง Keelung
+                </li>
+                <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d3-trans-2') ? 'line-through opacity-60' : ''}`}>
+                  <MissionCheckbox id="d3-trans-2" />
+                  🚆 ต่อรถ Taxi/Uber ไปชมวิวที่ <b>Heping Island Park (เกาะเหอผิง)</b> <span className="hours-tag">🕒 08:00 - 18:00</span>
+                  <MapLink 
+                    title="Heping Island Park" 
+                    description="เกาะเหอผิง ชมหินรูปร่างแปลกตา"
+                    review={locations.day3.points[4].review}
+                    googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Heping+Island+Park"
+                    day={3}
+                    stopIndex={4}
+                    color="#0ea5e9"
+                  />
+                </li>
+              </ul>
+            </div>
+
+            {/* Keelung Food */}
+            <div>
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-1 mb-3">
+                🥣 ตะลุยกินตลาดจีหลง (Keelung Night Market):
+              </div>
+              <p className="text-sm text-muted-foreground mb-3">🕒 ตลาดเปิด: 12:00 - 00:00 (บางร้านเปิดเย็น)</p>
+              <ul className="list-none p-0 m-0 space-y-2">
+                {[
+                  { id: 'd3-kfood-1', name: 'Zheng Ji Spare Ribs', desc: 'ซุปซี่โครงหมูตุ๋นยาจีน' },
+                  { id: 'd3-kfood-2', name: 'Wang Ji Tempura', desc: 'เทมปุระ/ลูกชิ้นปลาทอด' },
+                  { id: 'd3-kfood-3', name: 'Ah Hua Fried Noodle', desc: 'ผัดหมี่แกงกะหรี่ในตำนาน', hours: '10:00 - 06:00' },
+                  { id: 'd3-kfood-4', name: 'Nutritious Sandwich', desc: 'แซนวิชทอดไส้แน่น', hours: '11:30 - 00:00' },
+                ].map((item) => (
+                  <li key={item.id} data-mission className={`pl-8 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id={item.id} />
+                    🥢 <b>{item.name}:</b> {item.desc} {item.hours && <span className="hours-tag">🕒 {item.hours}</span>}
+                    <MapLink 
+                      title={item.name} 
+                      description={item.desc}
+                      hours={item.hours}
+                      googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' Keelung')}`}
+                      day={3}
+                      stopIndex={5}
+                      color="#0ea5e9"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="path-connector">
+            <div className="path-line" />
+            <span className="text-2xl">⬇️ เปลี่ยนบรรยากาศจากทะเล สู่เมืองภูเขา...</span>
+          </div>
+
+          {/* Jiufen Card */}
+          <div className="p-6 rounded-2xl border-4 border-taiwan-red mb-4" style={{ background: 'hsl(0 86% 97%)' }}>
+            <h3 className="mt-0 font-extrabold text-xl text-red-700 flex items-center gap-3">
+              🏮 STOP 2: ถนนคนเดินบนภูเขา (Jiufen Old Street) <span className="bg-white/70 text-muted-foreground text-sm py-1 px-3 rounded ml-2">ช่วงเย็น - ค่ำ</span>
+            </h3>
+            
+            <div className="embed-map-container">
+              <iframe 
+                src="https://maps.google.com/maps?q=Jiufen+Old+Street&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full border-0"
+                title="Jiufen Map"
+              />
+            </div>
+
+            <div className="mb-4">
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-1 mb-3">
+                📸 จุดถ่ายรูปห้ามพลาด:
+              </div>
+              <ul className="list-none p-0 m-0 space-y-2">
+                <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d3-photo-1') ? 'line-through opacity-60' : ''}`}>
+                  <MissionCheckbox id="d3-photo-1" />
+                  📸 <b>A-Mei Tea House:</b> โรงน้ำชาโคมแดง <span className="hours-tag">🕒 08:30 - 23:00</span>
+                  <MapLink 
+                    title="A-Mei Tea House" 
+                    description="โรงน้ำชาโคมแดง"
+                    review={locations.day3.points[8].review}
+                    googleMapsUrl="https://www.google.com/maps/search/?api=1&query=A-Mei+Tea+House"
+                    day={3}
+                    stopIndex={8}
+                    color="#dc2626"
+                  />
+                </li>
+                <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d3-photo-2') ? 'line-through opacity-60' : ''}`}>
+                  <MissionCheckbox id="d3-photo-2" />
+                  📸 <b>Hidden Spots:</b> ทางเดินหลังร้านน้ำชา
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-1 mb-3">
+                🥢 ของกินขึ้นชื่อจิ่วเฟิ่น:
+              </div>
+              <p className="text-sm text-muted-foreground mb-3">🕒 ร้านส่วนใหญ่ปิดเร็ว: ~19:00 - 20:00</p>
+              <ul className="list-none p-0 m-0 space-y-2">
+                {[
+                  { id: 'd3-jfood-1', name: 'A Gan Yi Taro Balls', desc: 'บัวลอยเผือกหนึบ', hours: '09:00 - 20:00', review: locations.day3.points[9].review, stopIndex: 9 },
+                  { id: 'd3-jfood-2', name: 'A-Zhu Peanut Ice Cream', desc: 'โรตีไอติมผักชี', hours: '09:30 - 20:30' },
+                  { id: 'd3-jfood-3', name: 'Ah-Lan Glutinous Rice Cake', desc: 'ขนมกุยช่าย', hours: '08:00 - 20:00' },
+                ].map((item) => (
+                  <li key={item.id} data-mission className={`pl-8 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id={item.id} />
+                    🥢 <b>{item.name}:</b> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                    <MapLink 
+                      title={item.name} 
+                      description={item.desc}
+                      hours={item.hours}
+                      review={item.review}
+                      googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`}
+                      day={3}
+                      stopIndex={item.stopIndex || 9}
+                      color="#dc2626"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* DAY 4 */}
+      <div id="day4" className="day-wrapper">
+        <div className="text-center py-10 px-5 text-white" style={{ background: 'linear-gradient(135deg, #64748b 30%, #3b82f6 100%)' }}>
+          <h1 className="m-0 font-extrabold text-2xl tracking-wide">🇹🇼 TAIPEI TRIP 2026: DAY 4</h1>
+          <h2 className="mt-2 font-semibold text-xl">🚉 Central Hub & Departure (เก็บตก & เดินทางกลับ)</h2>
+          <div className="inline-flex justify-center gap-5 mt-5 bg-white/20 py-2 px-5 rounded-full">
+            <span>🗓️ 2 Feb 2026 (Monday)</span>
+          </div>
+        </div>
+
+        <div className="p-8">
+          {/* Food Card */}
+          <div className="p-6 rounded-2xl border-l-8 border-day4 bg-muted/30 mb-4">
+            <h3 className="mt-0 font-extrabold text-xl text-foreground flex items-center gap-3">
+              🌅 STOP 1: มื้อเช้าส่งท้าย (Last Bites)
+            </h3>
+            <span className="block text-muted-foreground font-semibold text-sm mb-4 ml-10">📍 Location: Zhongzheng District</span>
+            
+            <div className="bg-red-100 p-3 rounded-lg border border-red-200 mb-4">
+              <strong className="text-red-700">⚠️ Warning: Day 4 is Monday!</strong><br />
+              <span className="text-sm">ร้านดังหลายร้าน (โดยเฉพาะ Fu Hang Soy Milk) มัก <b>หยุดวันจันทร์</b> จึงขอแนะนำร้านสำรองที่เปิดชัวร์ไว้ให้ครับ</span>
+            </div>
+
+            <p className="italic text-muted-foreground mb-4">เติมพลังมื้อสุดท้ายก่อนกลับ:</p>
+            <ul className="list-none p-0 m-0 space-y-3">
+              <li data-mission className={`pl-8 relative text-sm bg-amber-50 p-2 rounded ${checkedItems.has('d4-food-1') ? 'line-through opacity-60' : ''}`}>
+                <MissionCheckbox id="d4-food-1" />
+                🥣 <strong>⭐ Liu Shan Dong Beef Noodles:</strong> ก๋วยเตี๋ยวเนื้อตุ๋น (ร้านลับมิชลิน) <span className="hours-tag">🕒 08:00 - 20:00 (Mon-Sat)</span><br />
+                <span className="text-xs text-amber-700">👉 แนะนำร้านนี้แทน Fu Hang เพราะเปิดวันจันทร์และอร่อยมาก!</span>
+                <MapLink 
+                  title="Liu Shan Dong Beef Noodles" 
+                  description="ก๋วยเตี๋ยวเนื้อมิชลิน"
+                  review={locations.day4.points[1].review}
+                  googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Liu+Shan+Dong+Beef+Noodles"
+                  day={4}
+                  stopIndex={1}
+                  color="#64748b"
+                />
+              </li>
+              <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d4-food-2') ? 'line-through opacity-60' : ''}`}>
+                <MissionCheckbox id="d4-food-2" />
+                🥣 <strong>Jinfeng Braised Pork Rice:</strong> ข้าวหน้าหมูพะโล้ <span className="hours-tag">🕒 08:30 - 01:00</span>
+                <MapLink 
+                  title="Jinfeng Braised Pork Rice" 
+                  description="ข้าวหน้าหมูพะโล้"
+                  googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Jinfeng+Braised+Pork+Rice"
+                  day={4}
+                  stopIndex={1}
+                  color="#64748b"
+                />
+              </li>
+              <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d4-food-3') ? 'line-through opacity-60' : ''}`}>
+                <MissionCheckbox id="d4-food-3" />
+                🥣 <strong>Carrispy Donuts:</strong> โดนัทนมสดทอดกรอบ <span className="hours-tag">🕒 11:00 - 19:15</span>
+                <MapLink 
+                  title="Carrispy Donuts" 
+                  description="โดนัทนมสดทอด"
+                  review={locations.day4.points[3].review}
+                  googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Carrispy+Donuts"
+                  day={4}
+                  stopIndex={3}
+                  color="#64748b"
+                />
+              </li>
+            </ul>
+          </div>
+
+          <div className="path-connector">
+            <div className="path-line" />
+            <span className="text-2xl">⬇️ ใช้เวลาที่เหลือช้อปปิ้งของฝาก...</span>
+          </div>
+
+          {/* Shopping Card */}
+          <div className="p-6 rounded-2xl border-l-8 border-taiwan-pink bg-pink-50/50 mb-4">
+            <h3 className="mt-0 font-extrabold text-xl text-taiwan-pink flex items-center gap-3">
+              🛍️ STOP 2: ช้อปปิ้งนาทีสุดท้าย
+            </h3>
+            <span className="block text-muted-foreground font-semibold text-sm mb-4 ml-10">📍 Location: Taipei Main Station Area</span>
+            
+            <div className="bg-cyan-100 p-3 rounded-lg border border-cyan-200 mb-4 text-sm text-cyan-800">
+              🕒 <b>Time Management:</b> เนื่องจากต้องออกจากสถานี 10:30 น. และร้านส่วนใหญ่เปิด 10:00-11:00 น. <u>จะมีเวลาช้อปน้อยมาก</u> แนะนำให้เล็งร้านที่เปิดเช้าหรือซื้อ 7-11/PX Mart แทนครับ
+            </div>
+
+            <ul className="list-none p-0 m-0 space-y-3">
+              <li data-mission className={`bg-amber-50 border-2 border-dashed border-amber-400 p-3 rounded-lg ${checkedItems.has('d4-shop-1') ? 'opacity-60' : ''}`}>
+                <MissionCheckbox id="d4-shop-1" />
+                <div className="font-extrabold text-amber-800">🎁 ของฝากที่คนไต้หวันซื้อให้กันเอง (Local Souvenirs)</div>
+                <ul className="mt-2 pl-5 text-sm text-amber-700 list-disc">
+                  <li><strong>PX Mart House Brand:</strong> ขนมขบเคี้ยวตรา PX Mart อร่อยและถูก</li>
+                  <li><strong>ชาใบ Oolong (ซองกระดาษ):</strong> รสชาติดีและราคาจริงใจ</li>
+                  <li><strong>ขนมงาดำ / ถั่วลิสงโบราณ:</strong> ขนมดั้งเดิมที่คนท้องถิ่นกินจริงๆ</li>
+                </ul>
+              </li>
+              <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d4-shop-2') ? 'line-through opacity-60' : ''}`}>
+                <MissionCheckbox id="d4-shop-2" />
+                🛒 <strong>PX Mart (Quan Lian):</strong> ซูเปอร์มาร์เก็ตท้องถิ่น (เปิด 8 โมงเช้า แวะได้เลย!) <span className="hours-tag">🕒 08:00 - 23:00</span>
+                <MapLink 
+                  title="PX Mart" 
+                  description="ซูเปอร์มาร์เก็ตท้องถิ่น"
+                  review={locations.day4.points[4].review}
+                  googleMapsUrl="https://www.google.com/maps/search/?api=1&query=PX+Mart+Zhongzheng"
+                  day={4}
+                  stopIndex={4}
+                  color="#db2777"
+                />
+              </li>
+            </ul>
+          </div>
+
+          <div className="path-connector">
+            <div className="path-line" />
+            <span className="text-2xl">⬇️ ได้เวลาบอกลาไทเป... มุ่งหน้าสนามบิน</span>
+          </div>
+
+          {/* Departure Card */}
+          <div className="p-6 rounded-2xl border-l-8 border-day1 bg-blue-50/50">
+            <h3 className="mt-0 font-extrabold text-xl text-day1 flex items-center gap-3">
+              ✈️ FINAL STOP: เดินทางกลับ (Back to BKK)
+            </h3>
+            <span className="block text-muted-foreground font-semibold text-sm mb-4 ml-10">📍 Destination: Taoyuan International Airport (TPE)</span>
+            
+            <div className="space-y-4 mt-5">
+              <div className="flex items-start gap-4 pb-4 border-b border-dashed border-muted">
+                <div className="font-extrabold text-taiwan-cyan w-24 flex-shrink-0">Heading to Airport</div>
+                <div>
+                  <div className="font-bold">ออกเดินทางจาก Main Station</div>
+                  <span className="text-sm text-muted-foreground">มุ่งหน้าสู่สนามบินเถาหยวน (เผื่อเวลาเดินทางประมาณ 1 ชม.)</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 pb-4 border-b border-dashed border-muted">
+                <div className="font-extrabold text-taiwan-cyan w-24 flex-shrink-0">11:30 น.</div>
+                <div>
+                  <div className="font-bold">Arrive Airport</div>
+                  <span className="text-sm text-muted-foreground">Check-in, โหลดกระเป๋า, ผ่าน ตม.</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="font-extrabold text-taiwan-red w-24 flex-shrink-0">13:50 น.</div>
+                <div>
+                  <div className="font-bold text-taiwan-red">Flight Departure 🛫</div>
+                  <span className="text-sm text-muted-foreground">เหินฟ้ากลับสู่กรุงเทพฯ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center py-6 bg-muted text-muted-foreground font-bold">
+          👋 Have a safe flight! เดินทางปลอดภัยครับ 🇹🇼
+        </div>
+      </div>
+
+      <MissionHUD total={totalItems || 50} checked={checkedItems.size} />
     </div>
   );
 };
