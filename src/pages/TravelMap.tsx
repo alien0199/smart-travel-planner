@@ -224,7 +224,7 @@ const TravelMap = () => {
             )}
             
             <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedPoint.googleMapsQuery)}`}
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedPoint.googleMapsQuery || selectedPoint.title + ' Taipei Taiwan')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full py-3 rounded-2xl text-white font-bold"
