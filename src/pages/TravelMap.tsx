@@ -163,16 +163,10 @@ const TravelMap = () => {
       {/* Controls */}
       <div className="absolute top-4 left-4 right-4 z-50 max-w-md mx-auto">
         <div className="bg-white/95 backdrop-blur rounded-3xl p-3 shadow-lg border-2 border-white">
-          <div className="flex justify-between items-center mb-2">
+          <div className="flex justify-center items-center mb-2">
             <h1 className="text-lg font-bold text-foreground flex items-center gap-2">
               🇹🇼 บันทึกเที่ยวไทเป
             </h1>
-            <button
-              onClick={handleBackToHome}
-              className="flex items-center gap-1.5 text-sm font-bold text-white bg-gradient-to-r from-pink-500 to-rose-500 px-4 py-2 rounded-xl hover:from-pink-600 hover:to-rose-600 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-            >
-              <ArrowLeft className="w-4 h-4" /> กลับหน้าแรก
-            </button>
           </div>
           <div className="flex gap-2 overflow-x-auto pb-1">
             {[1, 2, 3, 4].map((day) => (
