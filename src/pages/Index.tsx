@@ -569,8 +569,286 @@ const Index = () => {
             <div className="path-arrow-box">⬇️ เชื่อมต่อสู่ตอนเหนือ ผ่านเส้นทางสายอาร์ต...</div>
           </div>
 
-          {/* More day 2 content... */}
-          <p className="text-center text-muted-foreground py-8">📍 ดูรายละเอียดเพิ่มเติมและตำแหน่งในแผนที่ Interactive ด้านล่าง</p>
+          {/* Hidden Gems Card */}
+          <div className="rounded-2xl border-4 border-purple-500 overflow-hidden mb-4" style={{ background: 'hsl(270 100% 98%)' }}>
+            <div className="py-4 px-6 text-white" style={{ background: 'linear-gradient(135deg, #a855f7, #9333ea)' }}>
+              <h3 className="m-0 font-extrabold text-lg flex items-center gap-3">
+                <span className="w-9 h-9 rounded-full bg-white text-foreground flex items-center justify-center font-black text-lg shadow">2</span>
+                NEXT: HIDDEN GEMS <span className="text-sm opacity-90 ml-2">📍 Beimen & Main Station</span>
+              </h3>
+            </div>
+            <div className="p-6">
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-2 mb-3">
+                📸 จุดถ่ายรูปและเดินเล่น:
+              </div>
+              <ul className="list-none p-0 m-0 space-y-2">
+                {[
+                  { id: 'd2-photo-1', name: 'Bei Men (North Gate)', desc: 'ประตูเมืองโบราณ', hours: '24 Hours', review: locations.day2.points[5].review, stopIndex: 5 },
+                  { id: 'd2-photo-2', name: 'Taipei Post Office', desc: 'ตึกไปรษณีย์', hours: '08:30 - 21:00' },
+                  { id: 'd2-photo-3', name: 'The Red House', desc: 'ตึกแดง', hours: '11:00 - 21:30' },
+                  { id: 'd2-photo-4', name: 'Zhongshan Metro Mall', desc: 'ทางเดินใต้ดินอาร์ตโซน', hours: '11:00 - 21:30' },
+                ].map((item) => (
+                  <li key={item.id} data-mission className={`pl-8 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id={item.id} />
+                    📸 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                    <MapLink 
+                      title={item.name} 
+                      description={item.desc}
+                      hours={item.hours}
+                      review={item.review}
+                      googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' Taipei')}`}
+                      day={2}
+                      stopIndex={item.stopIndex || 5}
+                      color="#a855f7"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="path-connector">
+            <div className="path-line" />
+            <div className="path-arrow-box">⬇️ ขยับขึ้นเหนือ... ไปย่านฮิตติดเทรนด์!</div>
+          </div>
+
+          {/* North Side Card */}
+          <div className="rounded-2xl border-4 border-taiwan-orange overflow-hidden mb-4" style={{ background: 'hsl(33 100% 97%)' }}>
+            <div className="py-4 px-6 text-white" style={{ background: 'linear-gradient(135deg, #f97316, #ea580c)' }}>
+              <h3 className="m-0 font-extrabold text-lg flex items-center gap-3">
+                <span className="w-9 h-9 rounded-full bg-white text-foreground flex items-center justify-center font-black text-lg shadow">3</span>
+                MOVE: NORTH SIDE <span className="text-sm opacity-90 ml-2">📍 Zhongshan & Xingtian Temple</span>
+              </h3>
+            </div>
+            <div className="p-6">
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-2 mb-3">
+                🙏 กิจกรรมหลัก:
+              </div>
+              <ul className="list-none p-0 m-0 space-y-2 mb-4">
+                <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d2-xingtian') ? 'line-through opacity-60' : ''}`}>
+                  <MissionCheckbox id="d2-xingtian" />
+                  📍 <strong>Xingtian Temple:</strong> ขอพรต่อที่วัดสิงเทียน <span className="hours-tag">🕒 04:00 - 22:30</span>
+                  <MapLink 
+                    title="Xingtian Temple" 
+                    description="วัดสิงเทียน เทพเจ้ากวนอู"
+                    review={locations.day2.points[6].review}
+                    googleMapsUrl="https://www.google.com/maps/search/?api=1&query=Xingtian+Temple"
+                    day={2}
+                    stopIndex={6}
+                    color="#f97316"
+                  />
+                </li>
+              </ul>
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-2 mb-3">
+                🥢 ของกินท้องถิ่น:
+              </div>
+              <ul className="list-none p-0 m-0 space-y-2">
+                {[
+                  { id: 'd2-nfood-1', name: 'Legendary Flour Rice Noodle', desc: 'หมี่เส้นรสเข้มข้น', hours: '08:00 - 17:00 (ปิดอาทิตย์)' },
+                  { id: 'd2-nfood-2', name: 'Bu Lao Hakka Mochi', desc: 'โมจิก้อนยักษ์', hours: '11:00 - 18:00' },
+                  { id: 'd2-nfood-3', name: 'Songjiang Self-service Hot Pot', desc: 'สุกี้หินโบราณ', hours: '11:00 - 23:30' },
+                ].map((item) => (
+                  <li key={item.id} data-mission className={`pl-8 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id={item.id} />
+                    🥢 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                    <MapLink 
+                      title={item.name} 
+                      description={item.desc}
+                      hours={item.hours}
+                      googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' Taipei')}`}
+                      day={2}
+                      stopIndex={6}
+                      color="#f97316"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="path-connector">
+            <div className="path-line" />
+            <div className="path-arrow-box">⬇️ เข้าสู่ใจกลางเมือง พื้นที่สร้างสรรค์...</div>
+          </div>
+
+          {/* Creative Hub Card */}
+          <div className="rounded-2xl border-4 border-emerald-500 overflow-hidden mb-4" style={{ background: 'hsl(152 81% 97%)' }}>
+            <div className="py-4 px-6 text-white" style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}>
+              <h3 className="m-0 font-extrabold text-lg flex items-center gap-3">
+                <span className="w-9 h-9 rounded-full bg-white text-foreground flex items-center justify-center font-black text-lg shadow">4</span>
+                CENTER: CREATIVE HUB <span className="text-sm opacity-90 ml-2">📍 Huashan 1914 Creative Park</span>
+              </h3>
+            </div>
+            <div className="p-6">
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-2 mb-3">
+                🎨 กิจกรรมและช้อปปิ้ง:
+              </div>
+              <ul className="list-none p-0 m-0 space-y-2 mb-4">
+                {[
+                  { id: 'd2-art-1', name: 'Huashan 1914 Creative Park', desc: 'เดินเล่นถ่ายรูป', hours: '24 Hours (Shops 11-21)', review: locations.day2.points[7].review, stopIndex: 7 },
+                  { id: 'd2-art-2', name: 'Wooderful Life', desc: 'ร้านกล่องดนตรีงานไม้', hours: '11:00 - 21:00' },
+                ].map((item) => (
+                  <li key={item.id} data-mission className={`pl-8 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id={item.id} />
+                    🎨 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                    <MapLink 
+                      title={item.name} 
+                      description={item.desc}
+                      hours={item.hours}
+                      review={item.review}
+                      googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`}
+                      day={2}
+                      stopIndex={item.stopIndex || 7}
+                      color="#10b981"
+                    />
+                  </li>
+                ))}
+              </ul>
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-2 mb-3">
+                ☕ คาเฟ่และร้านอาหาร:
+              </div>
+              <ul className="list-none p-0 m-0 space-y-2">
+                {[
+                  { id: 'd2-cafe-1', name: 'Simple Kaffa (Flagship)', desc: 'กาแฟแชมป์โลก', hours: '10:00 - 17:00', review: locations.day2.points[8].review, stopIndex: 8 },
+                  { id: 'd2-cafe-2', name: 'Shuang Yue Food', desc: 'ซุปไก่ตุ๋นยาจีน', hours: '11:00-14:00, 17:00-20:00' },
+                ].map((item) => (
+                  <li key={item.id} data-mission className={`pl-8 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id={item.id} />
+                    ☕ <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                    <MapLink 
+                      title={item.name} 
+                      description={item.desc}
+                      hours={item.hours}
+                      review={item.review}
+                      googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`}
+                      day={2}
+                      stopIndex={item.stopIndex || 8}
+                      color="#10b981"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="path-connector">
+            <div className="path-line" />
+            <div className="path-arrow-box">➡️ มุ่งหน้าสู่ฝั่งตะวันออก ชมตึกสูง...</div>
+          </div>
+
+          {/* East Side Card */}
+          <div className="rounded-2xl border-4 border-taiwan-cyan overflow-hidden mb-4" style={{ background: 'hsl(204 100% 97%)' }}>
+            <div className="py-4 px-6 text-white" style={{ background: 'linear-gradient(135deg, #0ea5e9, #0284c7)' }}>
+              <h3 className="m-0 font-extrabold text-lg flex items-center gap-3">
+                <span className="w-9 h-9 rounded-full bg-white text-foreground flex items-center justify-center font-black text-lg shadow">5</span>
+                EAST SIDE: MODERN VIEW <span className="text-sm opacity-90 ml-2">📍 Xinyi & Taipei 101</span>
+              </h3>
+            </div>
+            <div className="p-6">
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-2 mb-3">
+                🏙️ กิจกรรมและจุดชมวิว:
+              </div>
+              <ul className="list-none p-0 m-0 space-y-2 mb-4">
+                {[
+                  { id: 'd2-east-1', name: 'Si Si Nan Cun', desc: 'หมู่บ้านทหารโบราณ (จุดถ่ายรูป 101)', hours: '24 Hours', review: locations.day2.points[9].review, stopIndex: 9 },
+                  { id: 'd2-east-2', name: 'Taipei 101 Mall', desc: 'เดินเล่นห้างหรู', hours: '11:00 - 21:30', review: locations.day2.points[10].review, stopIndex: 10 },
+                ].map((item) => (
+                  <li key={item.id} data-mission className={`pl-8 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id={item.id} />
+                    📸 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                    <MapLink 
+                      title={item.name} 
+                      description={item.desc}
+                      hours={item.hours}
+                      review={item.review}
+                      googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`}
+                      day={2}
+                      stopIndex={item.stopIndex || 9}
+                      color="#0ea5e9"
+                    />
+                  </li>
+                ))}
+              </ul>
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-2 mb-3">
+                🥯 ของกินย่านซิ่นอี้:
+              </div>
+              <ul className="list-none p-0 m-0 space-y-2">
+                {[
+                  { id: 'd2-efood-1', name: 'Chun Shui Tang', desc: 'ต้นตำรับชานมไข่มุก', hours: '11:00 - 21:30', review: locations.day2.points[11].review, stopIndex: 11 },
+                  { id: 'd2-efood-2', name: "Good Cho's", desc: 'เบเกิลแป้งหนึบ', hours: '11:00 - 18:00' },
+                  { id: 'd2-efood-3', name: 'Breeze Nan Shan', desc: 'แหล่งรวม Deli', hours: '11:00 - 21:30' },
+                ].map((item) => (
+                  <li key={item.id} data-mission className={`pl-8 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id={item.id} />
+                    🥢 <strong>{item.name}:</strong> {item.desc} <span className="hours-tag">🕒 {item.hours}</span>
+                    <MapLink 
+                      title={item.name} 
+                      description={item.desc}
+                      hours={item.hours}
+                      review={item.review}
+                      googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' Taipei')}`}
+                      day={2}
+                      stopIndex={item.stopIndex || 11}
+                      color="#0ea5e9"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="path-connector">
+            <div className="path-line" />
+            <div className="path-arrow-box">↩️ ปิดท้ายวันด้วยมื้อดึก...</div>
+          </div>
+
+          {/* Night Market Card */}
+          <div className="rounded-2xl border-4 border-taiwan-red overflow-hidden mb-4" style={{ background: 'hsl(0 86% 97%)' }}>
+            <div className="py-4 px-6 text-white" style={{ background: 'linear-gradient(135deg, #ef4444, #dc2626)' }}>
+              <h3 className="m-0 font-extrabold text-lg flex items-center gap-3">
+                <span className="w-9 h-9 rounded-full bg-white text-foreground flex items-center justify-center font-black text-lg shadow">6</span>
+                FINISH: NIGHT MARKET <span className="text-sm opacity-90 ml-2">📍 Ningxia Night Market</span>
+              </h3>
+            </div>
+            <div className="p-6">
+              <div className="font-bold text-muted-foreground flex items-center gap-2 border-b-2 border-muted pb-2 mb-3">
+                🌟 ร้านมิชลินและร้านดัง:
+              </div>
+              <p className="text-sm text-muted-foreground mb-3">🕒 ตลาดเปิด: 17:00 - 01:00 (ร้านส่วนใหญ่)</p>
+              <ul className="list-none p-0 m-0 space-y-2 mb-4">
+                {[
+                  { id: 'd2-nm-1', name: 'Liu Yu Zi', desc: 'เผือกทอดไส้ไข่เค็ม', review: locations.day2.points[12].review, stopIndex: 12 },
+                  { id: 'd2-nm-2', name: 'Fang Chia', desc: 'ข้าวมันไก่ฉีกไต้หวัน' },
+                  { id: 'd2-nm-3', name: "Rong's Pork Liver", desc: 'ซุปตับหมู' },
+                  { id: 'd2-nm-4', name: 'Yuan Huan Pien Oyster Omelet', desc: 'หอยทอดเวอร์ชันโมเดิร์น' },
+                ].map((item) => (
+                  <li key={item.id} data-mission className={`pl-8 relative text-sm ${checkedItems.has(item.id) ? 'line-through opacity-60' : ''}`}>
+                    <MissionCheckbox id={item.id} />
+                    🥢 <strong>{item.name}:</strong> {item.desc}
+                    <MapLink 
+                      title={item.name} 
+                      description={item.desc}
+                      review={item.review}
+                      googleMapsUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`}
+                      day={2}
+                      stopIndex={item.stopIndex || 12}
+                      color="#ef4444"
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              {/* Plan B */}
+              <div className="bg-muted/50 rounded-xl p-4 border-2 border-dashed border-muted">
+                <div className="font-bold text-muted-foreground mb-2">🌙 Plan B: Local Crowd (เผื่อคนแน่น)</div>
+                <p className="text-sm text-muted-foreground mb-2">ถ้า Ningxia คนเยอะจนเดินไม่ได้ แนะนำตลาดเหล่านี้:</p>
+                <ul className="list-none p-0 m-0 space-y-1">
+                  <li className="text-sm">• <strong>Shuangcheng Street Night Market:</strong> ตลาดเล็กๆ คนท้องถิ่นล้วน</li>
+                  <li className="text-sm">• <strong>Yansan Night Market:</strong> สายกินจริงจังต้องที่นี่</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
