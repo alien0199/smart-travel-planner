@@ -1067,6 +1067,14 @@ const Index = () => {
                 <MissionCheckbox id="d3-morning-2" />
                 <span className={checkedItems.has('d3-morning-2') ? 'line-through opacity-60' : ''}>
                   ☕ <strong>Must Try:</strong> ข้าวมันไต้หวัน (油飯), ข้าวต้ม, หมั่นโถว และของหวานโบราณ
+                  <MapLink 
+                    title="Shuanglian Morning Market Food" 
+                    description="ข้าวมันไต้หวัน ข้าวต้ม หมั่นโถว"
+                    googleMapsUrl="https://www.google.com/maps/search/?api=1&query=雙連市場+Shuanglian+Market+Taipei"
+                    day={3}
+                    stopIndex={0}
+                    color="#059669"
+                  />
                 </span>
               </li>
             </ul>
@@ -1209,6 +1217,14 @@ const Index = () => {
                 <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d3-photo-2') ? 'line-through opacity-60' : ''}`}>
                   <MissionCheckbox id="d3-photo-2" />
                   📸 <b>Hidden Spots:</b> ทางเดินหลังร้านน้ำชา
+                  <MapLink 
+                    title="Jiufen Hidden Path" 
+                    description="ทางเดินหลังร้านน้ำชา"
+                    googleMapsUrl="https://www.google.com/maps/search/?api=1&query=九份老街+Jiufen+Old+Street"
+                    day={3}
+                    stopIndex={8}
+                    color="#dc2626"
+                  />
                 </li>
                 <li data-mission className={`pl-8 relative text-sm ${checkedItems.has('d3-photo-3') ? 'line-through opacity-60' : ''}`}>
                   <MissionCheckbox id="d3-photo-3" />
