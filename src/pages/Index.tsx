@@ -1482,7 +1482,7 @@ const Index = () => {
       {/* Credits Footer */}
       <footer className="text-center py-8 bg-gradient-to-r from-day1 to-taiwan-pink">
         <div className="text-white/90 text-sm mb-2">
-          🛠️ จัดทำโดย
+          👽 ตัวต้นเรื่อง
         </div>
         <a 
           href="https://www.facebook.com/alieninburi.bunpook" 
