@@ -98,19 +98,19 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background" style={{ paddingBottom: '100px' }}>
+    <div className="min-h-screen bg-background safe-area-bottom" style={{ paddingBottom: '80px' }}>
       <StickyNav />
       
       {/* Hero Section */}
       <HeroSection />
 
       {/* TRIP TIPS */}
-      <div id="tips" className="day-wrapper mt-8 mx-4 sm:mx-auto">
-        <div className="text-center py-6 px-5 text-white" style={{ background: 'linear-gradient(90deg, #4f46e5, #818cf8)' }}>
-          <h2 className="m-0 font-extrabold text-xl">🚀 TRIP ESSENTIALS & PRO TIPS</h2>
-          <p className="mt-1 opacity-90">เตรียมตัวให้พร้อมก่อนลุยไทเป</p>
+      <div id="tips" className="day-wrapper mt-6">
+        <div className="text-center py-5 px-4 text-white" style={{ background: 'linear-gradient(90deg, #4f46e5, #818cf8)' }}>
+          <h2 className="m-0 font-extrabold text-lg sm:text-xl">🚀 TRIP ESSENTIALS & PRO TIPS</h2>
+          <p className="mt-1 opacity-90 text-sm">เตรียมตัวให้พร้อมก่อนลุยไทเป</p>
         </div>
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <div className="tip-box" style={{ background: 'hsl(152 81% 96%)', borderColor: 'hsl(151 81% 71%)' }}>
             <div className="font-extrabold text-lg mb-2 text-taiwan-green flex items-center gap-2">
               📝 Taiwan Arrival Card - TWAC (Update ต.ค. 2025)
@@ -141,17 +141,17 @@ const Index = () => {
 
       {/* DAY 1 */}
       <div id="day1" className="day-wrapper">
-        <div className="text-center py-10 px-5 text-white relative" style={{ background: 'linear-gradient(135deg, #2563eb 30%, #db2777 100%)' }}>
-          <h1 className="m-0 font-extrabold text-2xl tracking-wide" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
+        <div className="text-center py-8 px-4 text-white relative" style={{ background: 'linear-gradient(135deg, #2563eb 30%, #db2777 100%)' }}>
+          <h1 className="m-0 font-extrabold text-xl sm:text-2xl tracking-wide" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
             🇹🇼 TAIPEI TRIP 2026: DAY 1
           </h1>
-          <h2 className="mt-2 font-semibold text-xl">🛬 Arrival & West Side (เดินทางถึง & ฝั่งตะวันตก)</h2>
-          <div className="flex justify-center gap-5 mt-6">
-            <span className="info-badge">🗓️ Date: 30 Jan 2026 (Fri)</span>
+          <h2 className="mt-2 font-semibold text-base sm:text-xl">🛬 Arrival & West Side</h2>
+          <div className="flex justify-center gap-3 mt-4 flex-wrap">
+            <span className="info-badge text-xs sm:text-sm">🗓️ 30 Jan 2026 (Fri)</span>
           </div>
         </div>
 
-        <div className="p-8" style={{ background: 'hsl(210 40% 98%)' }}>
+        <div className="p-4 sm:p-8" style={{ background: 'hsl(210 40% 98%)' }}>
           {/* Journey Section */}
           <div className="rounded-2xl border-4 border-day1 overflow-hidden mb-4" style={{ background: 'hsl(217 91% 97%)' }}>
             <div className="py-4 px-6 flex items-center text-white" style={{ background: 'linear-gradient(90deg, #2563eb, #1d4ed8)' }}>
