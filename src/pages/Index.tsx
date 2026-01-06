@@ -3,6 +3,7 @@ import { Check } from 'lucide-react';
 import StickyNav from '@/components/StickyNav';
 import MissionHUD from '@/components/MissionHUD';
 import MapLink from '@/components/MapLink';
+import HeroSection from '@/components/HeroSection';
 import { locations } from '@/types/locations';
 
 const Index = () => {
@@ -97,11 +98,14 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen" style={{ paddingTop: 'calc(var(--nav-height) + 20px)', paddingBottom: '100px' }}>
+    <div className="min-h-screen bg-background" style={{ paddingBottom: '100px' }}>
       <StickyNav />
+      
+      {/* Hero Section */}
+      <HeroSection />
 
       {/* TRIP TIPS */}
-      <div id="tips" className="day-wrapper mt-5">
+      <div id="tips" className="day-wrapper mt-8 mx-4 sm:mx-auto">
         <div className="text-center py-6 px-5 text-white" style={{ background: 'linear-gradient(90deg, #4f46e5, #818cf8)' }}>
           <h2 className="m-0 font-extrabold text-xl">🚀 TRIP ESSENTIALS & PRO TIPS</h2>
           <p className="mt-1 opacity-90">เตรียมตัวให้พร้อมก่อนลุยไทเป</p>

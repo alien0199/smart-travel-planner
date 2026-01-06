@@ -80,22 +80,22 @@
   }
 
   .dark {
-    --background: 222 84% 5%;
+    --background: 222 47% 11%;
     --foreground: 210 40% 98%;
 
-    --card: 222 84% 5%;
+    --card: 222 47% 14%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 84% 5%;
+    --popover: 222 47% 14%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 217 91% 60%;
     --primary-foreground: 222 47% 11%;
 
-    --secondary: 217 33% 17%;
+    --secondary: 217 33% 20%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
+    --muted: 217 33% 20%;
     --muted-foreground: 215 20% 65%;
 
     --accent: 330 80% 55%;
@@ -104,9 +104,11 @@
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 212 27% 84%;
+    --border: 217 33% 25%;
+    --input: 217 33% 20%;
+    --ring: 217 91% 60%;
+
+    --shadow-card: 0 10px 25px -5px hsl(0 0% 0% / 0.4);
   }
 }
 
@@ -127,11 +129,19 @@
 
 @layer components {
   .sticky-nav {
-    @apply fixed top-0 left-0 right-0 flex justify-center items-center z-50 px-2 overflow-x-auto;
+    @apply fixed top-0 left-0 right-0 flex justify-between items-center z-50 px-2;
     height: var(--nav-height);
-    background-color: hsl(0 0% 100% / 0.95);
-    backdrop-filter: blur(10px);
+    background-color: hsl(var(--card) / 0.95);
+    backdrop-filter: blur(12px);
     box-shadow: 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-btn {
@@ -172,7 +182,7 @@
   .day-wrapper {
     @apply mx-auto mb-10 overflow-hidden;
     max-width: 900px;
-    background-color: hsl(0 0% 100%);
+    background-color: hsl(var(--card));
     border-radius: 20px;
     box-shadow: var(--shadow-card);
     scroll-margin-top: calc(var(--nav-height) + 20px);
