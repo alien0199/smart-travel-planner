@@ -122,6 +122,73 @@ const Index = () => {
               👉 กรอก Taiwan Arrival Card (TWAC) ที่นี่
             </a>
           </div>
+          {/* Quick Info Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+            {/* Currency Card */}
+            <div className="bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-200 rounded-xl p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">💰</span>
+                <span className="font-extrabold text-amber-700">Currency</span>
+              </div>
+              <div className="text-sm text-amber-900 space-y-1">
+                <p className="font-semibold">🇹🇭 1 THB ≈ 0.95 TWD</p>
+                <p className="font-semibold">🇹🇼 1 TWD ≈ 1.05 THB</p>
+                <p className="text-xs text-amber-600 mt-2">*อัตราโดยประมาณ</p>
+              </div>
+              <a 
+                href="https://www.xe.com/currencyconverter/convert/?Amount=1&From=THB&To=TWD" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-1 text-xs text-amber-700 hover:text-amber-900 underline mt-2 font-semibold"
+              >
+                🔄 เช็คเรทล่าสุด →
+              </a>
+            </div>
+
+            {/* Emergency Card */}
+            <div className="bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200 rounded-xl p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">🚨</span>
+                <span className="font-extrabold text-red-700">Emergency</span>
+              </div>
+              <div className="text-sm text-red-900 space-y-1">
+                <p><strong>🚔 ตำรวจ:</strong> 110</p>
+                <p><strong>🚑 ฉุกเฉิน/ไฟไหม้:</strong> 119</p>
+                <p><strong>🏥 สายด่วน:</strong> 1922</p>
+              </div>
+              <a 
+                href="https://www.boca.gov.tw/sp-foof-countrycp-03-19-cf102-1.html" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-1 text-xs text-red-700 hover:text-red-900 underline mt-2 font-semibold"
+              >
+                📋 ข้อมูลสถานทูต →
+              </a>
+            </div>
+
+            {/* Weather Card */}
+            <div className="bg-gradient-to-br from-sky-50 to-sky-100 border-2 border-sky-200 rounded-xl p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">🌤️</span>
+                <span className="font-extrabold text-sky-700">Weather</span>
+              </div>
+              <div className="text-sm text-sky-900 space-y-1">
+                <p><strong>🌡️ ม.ค.-ก.พ.:</strong> 12-18°C</p>
+                <p><strong>🧥 แนะนำ:</strong> เสื้อกันหนาว</p>
+                <p className="text-xs text-sky-600">*ข้อมูลจากกรมอุตุไต้หวัน</p>
+              </div>
+              <a 
+                href="https://www.cwa.gov.tw/eng/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-1 text-xs text-sky-700 hover:text-sky-900 underline mt-2 font-semibold"
+              >
+                ☁️ พยากรณ์ล่าสุด (CWA) →
+              </a>
+            </div>
+          </div>
+
+          {/* Tips List */}
           <ul className="list-none p-0 m-0 mt-4 space-y-2">
             <li className="pl-2 relative text-sm">
               💡 <strong>EasyCard (Yoyo Card):</strong> บัตรเดียวเที่ยวทั่วไทย(เป) ใช้ขึ้นรถไฟ, รถเมล์, ซื้อของ 7-11. ซื้อได้ที่สนามบินหรือสถานีรถไฟ
