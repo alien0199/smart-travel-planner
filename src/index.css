@@ -149,12 +149,13 @@
   .sticky-nav {
     @apply fixed top-0 left-0 right-0 flex justify-between items-center z-50;
     height: var(--nav-height);
-    padding: 0 env(safe-area-inset-right, 8px) 0 env(safe-area-inset-left, 8px);
-    padding-top: env(safe-area-inset-top, 0px);
-    background-color: hsl(var(--card) / 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    padding: 4px env(safe-area-inset-right, 8px) 4px env(safe-area-inset-left, 8px);
+    padding-top: calc(env(safe-area-inset-top, 0px) + 4px);
+    background: linear-gradient(to bottom, hsl(0 0% 100% / 0.98), hsl(0 0% 100% / 0.95));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 2px 8px hsl(0 0% 0% / 0.08);
+    border-bottom: 1px solid hsl(0 0% 0% / 0.05);
   }
 
   .scrollbar-hide {
