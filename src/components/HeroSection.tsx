@@ -12,28 +12,28 @@ const HeroSection = () => {
       </div>
       
       {/* Content - Optimized for mobile */}
-      <div className="relative h-full flex flex-col items-center justify-center text-center px-3 pt-14">
+      <div className="relative h-full flex flex-col items-center justify-center text-center px-4 pt-14">
         <div className="animate-fade-in">
-          <span className="inline-block bg-taiwan-gold/90 text-white font-bold px-2.5 py-0.5 rounded-full text-[10px] mb-2 shadow-lg">
+          <span className="inline-block bg-taiwan-gold/90 text-white font-bold px-3 py-1 rounded-full text-xs mb-2 shadow-lg">
             🗓️ 30 JAN - 2 FEB 2026
           </span>
           
-          <h1 className="text-2xl font-extrabold text-white mb-2 drop-shadow-2xl tracking-tight leading-tight">
+          <h1 className="text-3xl font-extrabold text-white mb-2 drop-shadow-2xl tracking-tight leading-tight">
             <span className="text-taiwan-cyan">TAIPEI</span> TRIP
           </h1>
           
-          <p className="text-white/90 text-xs max-w-xs mx-auto mb-2 font-medium drop-shadow-lg">
+          <p className="text-white/90 text-sm max-w-xs mx-auto mb-3 font-medium drop-shadow-lg">
             4 วัน 3 คืน ตะลุยไทเป กิน เที่ยว ช้อป
           </p>
           
-          <div className="flex flex-wrap justify-center gap-1.5">
-            <span className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-2 py-1 rounded-full text-[10px] font-semibold">
+          <div className="flex flex-wrap justify-center gap-2">
+            <span className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-3 py-1 rounded-full text-xs font-semibold">
               🏯 Taipei 101
             </span>
-            <span className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-2 py-1 rounded-full text-[10px] font-semibold">
+            <span className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-3 py-1 rounded-full text-xs font-semibold">
               🏮 Jiufen
             </span>
-            <span className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-2 py-1 rounded-full text-[10px] font-semibold">
+            <span className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-3 py-1 rounded-full text-xs font-semibold">
               🍜 Night Markets
             </span>
           </div>

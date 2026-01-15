@@ -85,14 +85,14 @@ const Index = () => {
         e.stopPropagation();
         toggleCheck(id);
       }}
-      className={`inline-block w-5 h-5 rounded-md border-2 mr-2 cursor-pointer flex-shrink-0 relative top-1 transition-all ${
+      className={`inline-block w-6 h-6 rounded-md border-2 mr-2 cursor-pointer flex-shrink-0 relative top-0.5 transition-all ${
         checkedItems.has(id)
           ? 'bg-taiwan-green border-taiwan-green'
           : 'bg-white border-muted-foreground/30'
       }`}
     >
       {checkedItems.has(id) && (
-        <Check className="w-4 h-4 text-white absolute top-0 left-0.5" strokeWidth={3} />
+        <Check className="w-5 h-5 text-white absolute top-0 left-0.5" strokeWidth={3} />
       )}
     </span>
   );
@@ -108,20 +108,20 @@ const Index = () => {
 
       {/* TRIP TIPS */}
       <div id="tips" className="day-wrapper mt-4">
-        <div className="text-center py-3 px-3 text-white" style={{ background: 'linear-gradient(90deg, #4f46e5, #818cf8)' }}>
-          <h2 className="m-0 font-extrabold text-base">🚀 TRIP ESSENTIALS</h2>
-          <p className="mt-0.5 opacity-90 text-xs">เตรียมตัวให้พร้อมก่อนลุยไทเป</p>
+        <div className="text-center py-4 px-4 text-white" style={{ background: 'linear-gradient(90deg, #4f46e5, #818cf8)' }}>
+          <h2 className="m-0 font-extrabold text-lg">🚀 TRIP ESSENTIALS</h2>
+          <p className="mt-1 opacity-90 text-sm">เตรียมตัวให้พร้อมก่อนลุยไทเป</p>
         </div>
-        <div className="p-3">
+        <div className="p-4">
           {/* TWAC Card - Always visible */}
-          <div className="tip-box p-3 mb-3" style={{ background: 'hsl(152 81% 96%)', borderColor: 'hsl(151 81% 71%)' }}>
-            <div className="font-extrabold text-sm mb-1 text-taiwan-green flex items-center gap-1">
+          <div className="tip-box p-4 mb-4" style={{ background: 'hsl(152 81% 96%)', borderColor: 'hsl(151 81% 71%)' }}>
+            <div className="font-extrabold text-base mb-2 text-taiwan-green flex items-center gap-2">
               📝 Taiwan Arrival Card (TWAC)
             </div>
-            <p className="text-xs mb-2 text-emerald-900">
+            <p className="text-sm mb-3 text-emerald-900 leading-relaxed">
               กรอก TWAC ออนไลน์ <b>ภายใน 3 วันก่อนเดินทาง</b>
             </p>
-            <a href="https://twac.immigration.gov.tw/" target="_blank" rel="noopener noreferrer" className="underline text-taiwan-green font-bold text-xs">
+            <a href="https://twac.immigration.gov.tw/" target="_blank" rel="noopener noreferrer" className="underline text-taiwan-green font-bold text-sm">
               👉 กรอก TWAC ที่นี่
             </a>
           </div>
@@ -129,29 +129,29 @@ const Index = () => {
           {/* Collapsible Quick Info */}
           <button 
             onClick={() => setShowQuickInfo(!showQuickInfo)}
-            className="w-full flex items-center justify-between p-2.5 bg-slate-100 rounded-lg mb-2 text-xs font-semibold text-slate-700 active:bg-slate-200 touch-manipulation"
+            className="w-full flex items-center justify-between p-3 bg-slate-100 rounded-lg mb-3 text-sm font-semibold text-slate-700 active:bg-slate-200 touch-manipulation"
           >
             <span>💡 ข้อมูลเพิ่มเติม (สกุลเงิน, ฉุกเฉิน, อากาศ)</span>
-            <span className="text-lg">{showQuickInfo ? '−' : '+'}</span>
+            <span className="text-xl">{showQuickInfo ? '−' : '+'}</span>
           </button>
 
           {showQuickInfo && (
-            <div className="space-y-2 mb-3 animate-fade-in">
+            <div className="space-y-3 mb-4 animate-fade-in">
               {/* Currency */}
-              <div className="bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-lg p-2.5">
+              <div className="bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-lg p-3">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-amber-700 text-xs">💰 Currency</span>
-                  <span className="text-xs text-amber-800">1 THB ≈ 0.95 TWD</span>
+                  <span className="font-bold text-amber-700 text-sm">💰 Currency</span>
+                  <span className="text-sm text-amber-800">1 THB ≈ 0.95 TWD</span>
                 </div>
-                <a href="https://www.xe.com/currencyconverter/convert/?Amount=1&From=THB&To=TWD" target="_blank" rel="noopener noreferrer" className="text-[10px] text-amber-600 underline">
+                <a href="https://www.xe.com/currencyconverter/convert/?Amount=1&From=THB&To=TWD" target="_blank" rel="noopener noreferrer" className="text-xs text-amber-600 underline mt-1 inline-block">
                   เช็คเรทล่าสุด →
                 </a>
               </div>
 
               {/* Emergency */}
-              <div className="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-2.5">
-                <span className="font-bold text-red-700 text-xs">🚨 Emergency</span>
-                <div className="flex gap-3 mt-1 text-xs text-red-800">
+              <div className="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-3">
+                <span className="font-bold text-red-700 text-sm">🚨 Emergency</span>
+                <div className="flex gap-4 mt-2 text-sm text-red-800 font-medium">
                   <span>🚔 110</span>
                   <span>🚑 119</span>
                   <span>🏥 1922</span>
@@ -159,33 +159,33 @@ const Index = () => {
               </div>
 
               {/* Weather */}
-              <div className="bg-gradient-to-br from-sky-50 to-sky-100 border border-sky-200 rounded-lg p-2.5">
+              <div className="bg-gradient-to-br from-sky-50 to-sky-100 border border-sky-200 rounded-lg p-3">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-sky-700 text-xs">🌤️ Weather (ม.ค.-ก.พ.)</span>
-                  <span className="text-xs text-sky-800">12-18°C 🧥</span>
+                  <span className="font-bold text-sky-700 text-sm">🌤️ Weather (ม.ค.-ก.พ.)</span>
+                  <span className="text-sm text-sky-800 font-medium">12-18°C 🧥</span>
                 </div>
-                <a href="https://www.cwa.gov.tw/eng/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-sky-600 underline">
+                <a href="https://www.cwa.gov.tw/eng/" target="_blank" rel="noopener noreferrer" className="text-xs text-sky-600 underline mt-1 inline-block">
                   พยากรณ์ล่าสุด (CWA) →
                 </a>
               </div>
             </div>
           )}
 
-          {/* Tips List - Compact */}
-          <ul className="list-none p-0 m-0 space-y-1.5">
-            <li className="text-xs flex items-start gap-1">
+          {/* Tips List */}
+          <ul className="list-none p-0 m-0 space-y-2.5">
+            <li className="text-sm flex items-start gap-2 leading-relaxed">
               <span>💡</span>
               <span><strong>EasyCard:</strong> บัตรเดียวเที่ยวทั่วไทเป ซื้อได้ที่สนามบิน</span>
             </li>
-            <li className="text-xs flex items-start gap-1">
+            <li className="text-sm flex items-start gap-2 leading-relaxed">
               <span>💡</span>
               <span><strong>Receipt Lottery:</strong> ใบเสร็จทุกใบคือลอตเตอรี่!</span>
             </li>
-            <li className="text-xs flex items-start gap-1">
+            <li className="text-sm flex items-start gap-2 leading-relaxed">
               <span>💡</span>
               <span><strong>Rain Gear:</strong> ฝนตกบ่อย พกร่มเสมอ</span>
             </li>
-            <li className="text-xs flex items-start gap-1">
+            <li className="text-sm flex items-start gap-2 leading-relaxed">
               <span>💡</span>
               <span><strong>Uber:</strong> มา 3-4 คน Uber คุ้มกว่ารถไฟฟ้า</span>
             </li>
@@ -195,33 +195,33 @@ const Index = () => {
 
       {/* DAY 1 */}
       <div id="day1" className="day-wrapper">
-        <div className="text-center py-4 px-3 text-white relative" style={{ background: 'linear-gradient(135deg, #2563eb 30%, #db2777 100%)' }}>
-          <h1 className="m-0 font-extrabold text-base tracking-wide" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
+        <div className="text-center py-5 px-4 text-white relative" style={{ background: 'linear-gradient(135deg, #2563eb 30%, #db2777 100%)' }}>
+          <h1 className="m-0 font-extrabold text-xl tracking-wide" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
             🇹🇼 DAY 1
           </h1>
-          <h2 className="mt-1 font-semibold text-sm">🛬 Arrival & West Side</h2>
-          <span className="inline-block mt-2 info-badge text-[10px] py-1 px-2">🗓️ 30 Jan 2026 (Fri)</span>
+          <h2 className="mt-1 font-semibold text-base">🛬 Arrival & West Side</h2>
+          <span className="inline-block mt-2 info-badge text-xs py-1.5 px-3">🗓️ 30 Jan 2026 (Fri)</span>
         </div>
 
-        <div className="p-3" style={{ background: 'hsl(210 40% 98%)' }}>
+        <div className="p-4" style={{ background: 'hsl(210 40% 98%)' }}>
           {/* Journey Section */}
-          <div className="rounded-xl border-2 border-day1 overflow-hidden mb-3" style={{ background: 'hsl(217 91% 97%)' }}>
-            <div className="py-2.5 px-3 flex items-center text-white" style={{ background: 'linear-gradient(90deg, #2563eb, #1d4ed8)' }}>
-              <h3 className="m-0 font-extrabold text-sm flex items-center gap-2">
+          <div className="rounded-xl border-2 border-day1 overflow-hidden mb-4" style={{ background: 'hsl(217 91% 97%)' }}>
+            <div className="py-3 px-4 flex items-center text-white" style={{ background: 'linear-gradient(90deg, #2563eb, #1d4ed8)' }}>
+              <h3 className="m-0 font-extrabold text-base flex items-center gap-2">
                 ✈️ THE JOURNEY
               </h3>
             </div>
-            <div className="p-3">
-              {/* Timeline - Compact */}
-              <div className="space-y-3">
+            <div className="p-4">
+              {/* Timeline */}
+              <div className="space-y-4">
                 {/* Step 1 */}
-                <div className="flex items-start gap-2">
-                  <div className="w-8 h-8 rounded-full bg-day1 text-white flex items-center justify-center text-sm flex-shrink-0 shadow">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-day1 text-white flex items-center justify-center text-lg flex-shrink-0 shadow">
                     🛫
                   </div>
-                  <div className="flex-1 bg-white p-2.5 rounded-lg border-l-3 border-day1 shadow-sm">
-                    <span className="font-bold text-day1 text-xs">10:55 น.</span>
-                    <div className="font-semibold text-xs mt-0.5">
+                  <div className="flex-1 bg-white p-3 rounded-lg border-l-4 border-day1 shadow-sm">
+                    <span className="font-bold text-day1 text-sm">10:55 น.</span>
+                    <div className="font-semibold text-sm mt-1">
                       Suvarnabhumi Airport 
                       <MapLink 
                         title="Suvarnabhumi Airport" 
@@ -234,16 +234,16 @@ const Index = () => {
                     </div>
                   </div>
                 </div>
-                <div className="text-center text-day1 text-lg ml-4">⬇️</div>
+                <div className="text-center text-day1 text-xl ml-5">⬇️</div>
 
                 {/* Step 2 */}
-                <div className="flex items-start gap-2">
-                  <div className="w-8 h-8 rounded-full bg-day1 text-white flex items-center justify-center text-sm flex-shrink-0 shadow">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-day1 text-white flex items-center justify-center text-lg flex-shrink-0 shadow">
                     🛬
                   </div>
-                  <div className="flex-1 bg-white p-2.5 rounded-lg border-l-3 border-day1 shadow-sm">
-                    <span className="font-bold text-day1 text-xs">15:25 น.</span>
-                    <div className="font-semibold text-xs mt-0.5">
+                  <div className="flex-1 bg-white p-3 rounded-lg border-l-4 border-day1 shadow-sm">
+                    <span className="font-bold text-day1 text-sm">15:25 น.</span>
+                    <div className="font-semibold text-sm mt-1">
                       Taoyuan Airport 
                       <MapLink 
                         title="Taoyuan International Airport" 
@@ -255,32 +255,32 @@ const Index = () => {
                         color="#2563eb"
                       />
                     </div>
-                    <p className="text-muted-foreground text-[10px] mt-0.5">ผ่าน ตม. & รับกระเป๋า</p>
+                    <p className="text-muted-foreground text-xs mt-1">ผ่าน ตม. & รับกระเป๋า</p>
                   </div>
                 </div>
-                <div className="text-center text-day1 text-lg ml-4">⬇️</div>
+                <div className="text-center text-day1 text-xl ml-5">⬇️</div>
 
                 {/* Step 3 */}
-                <div className="flex items-start gap-2">
-                  <div className="w-8 h-8 rounded-full bg-day1 text-white flex items-center justify-center text-sm flex-shrink-0 shadow">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-day1 text-white flex items-center justify-center text-lg flex-shrink-0 shadow">
                     🚆
                   </div>
-                  <div className="flex-1 bg-white p-2.5 rounded-lg border-l-3 border-day1 shadow-sm">
-                    <span className="font-bold text-day1 text-xs">Airport Express</span>
-                    <div className="font-semibold text-xs mt-0.5">เข้าตัวเมือง</div>
-                    <p className="text-muted-foreground text-[10px] mt-0.5">นั่งรถไฟสายสีม่วง → Main Station</p>
+                  <div className="flex-1 bg-white p-3 rounded-lg border-l-4 border-day1 shadow-sm">
+                    <span className="font-bold text-day1 text-sm">Airport Express</span>
+                    <div className="font-semibold text-sm mt-1">เข้าตัวเมือง</div>
+                    <p className="text-muted-foreground text-xs mt-1">นั่งรถไฟสายสีม่วง → Main Station</p>
                   </div>
                 </div>
-                <div className="text-center text-day1 text-lg ml-4">⬇️</div>
+                <div className="text-center text-day1 text-xl ml-5">⬇️</div>
 
                 {/* Step 4 */}
-                <div className="flex items-start gap-2">
-                  <div className="w-8 h-8 rounded-full bg-day1 text-white flex items-center justify-center text-sm flex-shrink-0 shadow">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-day1 text-white flex items-center justify-center text-lg flex-shrink-0 shadow">
                     🏨
                   </div>
-                  <div className="flex-1 bg-white p-2.5 rounded-lg border-l-3 border-day1 shadow-sm">
-                    <span className="font-bold text-day1 text-xs">Check-in</span>
-                    <div className="font-semibold text-xs mt-0.5">
+                  <div className="flex-1 bg-white p-3 rounded-lg border-l-4 border-day1 shadow-sm">
+                    <span className="font-bold text-day1 text-sm">Check-in</span>
+                    <div className="font-semibold text-sm mt-1">
                       Mayer Inn Hotel 
                       <MapLink 
                         title="Mayer Inn Hotel" 
@@ -298,15 +298,15 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="path-connector py-2">
-            <div className="path-arrow-box text-[10px] py-0.5 px-2">⬇️ ลุยย่านซีเหมินติง ⬇️</div>
+          <div className="path-connector py-3">
+            <div className="path-arrow-box text-sm py-1 px-3">⬇️ ลุยย่านซีเหมินติง ⬇️</div>
           </div>
 
           {/* Ximending Section */}
           <div className="rounded-xl border-2 border-taiwan-pink overflow-hidden" style={{ background: 'hsl(327 73% 97%)' }}>
-            <div className="py-2.5 px-3 text-white" style={{ background: 'linear-gradient(90deg, #db2777, #be185d)' }}>
-              <h3 className="m-0 font-extrabold text-sm">
-                🌆 XIMENDING <span className="text-[10px] opacity-90 ml-1">📍 Wanhua</span>
+            <div className="py-3 px-4 text-white" style={{ background: 'linear-gradient(90deg, #db2777, #be185d)' }}>
+              <h3 className="m-0 font-extrabold text-base">
+                🌆 XIMENDING <span className="text-xs opacity-90 ml-2">📍 Wanhua</span>
               </h3>
             </div>
 
@@ -318,15 +318,15 @@ const Index = () => {
               />
             </div>
 
-            <div className="p-3">
+            <div className="p-4">
               {/* Vintage Cafe */}
-              <div className="vintage-box mt-0 p-2.5">
-                <div className="font-bold text-amber-800 flex items-center gap-1 mb-1.5 text-xs">
-                  <span className="bg-taiwan-orange text-white text-[10px] py-0.5 px-1.5 rounded">CAFE</span>
+              <div className="vintage-box mt-0 p-3">
+                <div className="font-bold text-amber-800 flex items-center gap-2 mb-2 text-sm">
+                  <span className="bg-taiwan-orange text-white text-xs py-0.5 px-2 rounded">CAFE</span>
                   ร้านกาแฟคลาสสิก
                 </div>
-                <ul className="list-none p-0 m-0 space-y-1.5">
-                  <li data-mission className="pl-5 relative text-xs text-amber-900">
+                <ul className="list-none p-0 m-0 space-y-2.5">
+                  <li data-mission className="pl-6 relative text-sm text-amber-900 leading-relaxed">
                     <MissionCheckbox id="d1-cafe-1" />
                     <span className={checkedItems.has('d1-cafe-1') ? 'line-through opacity-60' : ''}>
                       ☕ <strong>Fong Da Coffee:</strong> ร้านกาแฟ 60+ ปี
@@ -341,10 +341,10 @@ const Index = () => {
                       />
                     </span>
                   </li>
-                  <li data-mission className="pl-6 relative text-sm text-amber-900">
+                  <li data-mission className="pl-6 relative text-sm text-amber-900 leading-relaxed">
                     <MissionCheckbox id="d1-cafe-2" />
                     <span className={checkedItems.has('d1-cafe-2') ? 'line-through opacity-60' : ''}>
-                      ☕ <strong>Shang Shang Coffee (上上咖啡):</strong> ร้านกาแฟคลาสสิกใกล้อนุสรณ์สถานเจียงไคเช็ค เป็นที่นิยมของคนทำงานท้องถิ่น
+                      ☕ <strong>Shang Shang Coffee (上上咖啡):</strong> ร้านกาแฟคลาสสิกใกล้อนุสรณ์สถานเจียงไคเช็ค
                       <MapLink 
                         title="Shang Shang Coffee" 
                         description="ร้านกาแฟคลาสสิกคนพื้นที่"
@@ -359,8 +359,8 @@ const Index = () => {
               </div>
 
               {/* Food Section */}
-              <div className="bg-white p-5 rounded-2xl shadow-sm mb-6">
-                <div className="font-extrabold text-taiwan-pink text-lg flex items-center gap-2 border-b-2 border-pink-200 pb-2 mb-4">
+              <div className="bg-white p-4 rounded-2xl shadow-sm mb-4 mt-4">
+                <div className="font-extrabold text-taiwan-pink text-base flex items-center gap-2 border-b-2 border-pink-200 pb-2 mb-4">
                   🍜 FOOD ADVENTURE CHECKLIST (ตะลุยกิน)
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
