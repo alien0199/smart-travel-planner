@@ -100,7 +100,7 @@ const StickyNav = () => {
       "sticky-nav safe-area-top transition-all duration-300",
       isScrolled ? "shadow-lg" : "shadow-md"
     )}>
-      <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide flex-1 min-w-0 px-0.5">
+      <div className="flex items-center gap-0.5 overflow-x-auto scrollbar-hide flex-1 min-w-0">
         {navItems.map((item) => {
           const isActive = activeSection === item.id;
           const IconComponent = item.icon;
@@ -109,26 +109,26 @@ const StickyNav = () => {
               key={item.id}
               onClick={() => handleClick(item.id)}
               className={cn(
-                'flex items-center gap-1 transition-all duration-200 text-xs font-semibold whitespace-nowrap rounded-full border-2 px-2.5 py-1.5',
-                'active:scale-95',
+                'flex items-center gap-0.5 transition-all duration-200 text-[11px] font-semibold whitespace-nowrap rounded-full border px-2 py-1.5 min-h-[36px]',
+                'active:scale-95 touch-manipulation',
                 isActive 
                   ? `${item.activeColor} ${item.activeBg} ${item.activeBorder} shadow-sm` 
                   : `text-slate-500 ${item.bgColor} border-transparent hover:border-slate-200`
               )}
             >
-              <IconComponent className="w-3.5 h-3.5 flex-shrink-0" />
+              <IconComponent className="w-3 h-3 flex-shrink-0" />
               <span>{item.label}</span>
             </button>
           );
         })}
       </div>
       
-      <div className="flex items-center flex-shrink-0 ml-1 pr-0.5">
+      <div className="flex items-center flex-shrink-0 ml-0.5">
         <button
           onClick={() => navigate('/map')}
-          className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold text-xs transition-all shadow-md hover:shadow-lg active:scale-95"
+          className="flex items-center gap-0.5 px-2 py-1.5 min-h-[36px] rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold text-[11px] transition-all shadow-md hover:shadow-lg active:scale-95 touch-manipulation"
         >
-          <Map className="w-3.5 h-3.5" />
+          <Map className="w-3 h-3" />
           <span>Map</span>
         </button>
       </div>
