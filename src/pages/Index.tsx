@@ -97,110 +97,97 @@ const Index = () => {
     </span>
   );
 
+  const [showQuickInfo, setShowQuickInfo] = useState(false);
+
   return (
-    <div className="min-h-screen bg-background safe-area-bottom" style={{ paddingBottom: '80px' }}>
+    <div className="min-h-screen bg-background safe-area-bottom" style={{ paddingBottom: '70px' }}>
       <StickyNav />
       
       {/* Hero Section */}
       <HeroSection />
 
       {/* TRIP TIPS */}
-      <div id="tips" className="day-wrapper mt-6">
-        <div className="text-center py-5 px-4 text-white" style={{ background: 'linear-gradient(90deg, #4f46e5, #818cf8)' }}>
-          <h2 className="m-0 font-extrabold text-lg sm:text-xl">🚀 TRIP ESSENTIALS & PRO TIPS</h2>
-          <p className="mt-1 opacity-90 text-sm">เตรียมตัวให้พร้อมก่อนลุยไทเป</p>
+      <div id="tips" className="day-wrapper mt-4">
+        <div className="text-center py-3 px-3 text-white" style={{ background: 'linear-gradient(90deg, #4f46e5, #818cf8)' }}>
+          <h2 className="m-0 font-extrabold text-base">🚀 TRIP ESSENTIALS</h2>
+          <p className="mt-0.5 opacity-90 text-xs">เตรียมตัวให้พร้อมก่อนลุยไทเป</p>
         </div>
-        <div className="p-4 sm:p-6">
-          <div className="tip-box" style={{ background: 'hsl(152 81% 96%)', borderColor: 'hsl(151 81% 71%)' }}>
-            <div className="font-extrabold text-lg mb-2 text-taiwan-green flex items-center gap-2">
-              📝 Taiwan Arrival Card - TWAC (Update ต.ค. 2025)
+        <div className="p-3">
+          {/* TWAC Card - Always visible */}
+          <div className="tip-box p-3 mb-3" style={{ background: 'hsl(152 81% 96%)', borderColor: 'hsl(151 81% 71%)' }}>
+            <div className="font-extrabold text-sm mb-1 text-taiwan-green flex items-center gap-1">
+              📝 Taiwan Arrival Card (TWAC)
             </div>
-            <p className="text-sm mb-2 text-emerald-900">
-              ตั้งแต่ <b>1 ตุลาคม 2025</b> ชาวต่างชาติต้องกรอก "Taiwan Arrival Card (TWAC)" ออนไลน์ <b>ภายใน 3 วันก่อนเดินทางถึง</b> เพื่อความรวดเร็วในการผ่าน ตม. ครับ
+            <p className="text-xs mb-2 text-emerald-900">
+              กรอก TWAC ออนไลน์ <b>ภายใน 3 วันก่อนเดินทาง</b>
             </p>
-            <a href="https://twac.immigration.gov.tw/" target="_blank" rel="noopener noreferrer" className="underline text-taiwan-green font-bold text-sm">
-              👉 กรอก Taiwan Arrival Card (TWAC) ที่นี่
+            <a href="https://twac.immigration.gov.tw/" target="_blank" rel="noopener noreferrer" className="underline text-taiwan-green font-bold text-xs">
+              👉 กรอก TWAC ที่นี่
             </a>
           </div>
-          {/* Quick Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-            {/* Currency Card */}
-            <div className="bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-200 rounded-xl p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">💰</span>
-                <span className="font-extrabold text-amber-700">Currency</span>
-              </div>
-              <div className="text-sm text-amber-900 space-y-1">
-                <p className="font-semibold">🇹🇭 1 THB ≈ 0.95 TWD</p>
-                <p className="font-semibold">🇹🇼 1 TWD ≈ 1.05 THB</p>
-                <p className="text-xs text-amber-600 mt-2">*อัตราโดยประมาณ</p>
-              </div>
-              <a 
-                href="https://www.xe.com/currencyconverter/convert/?Amount=1&From=THB&To=TWD" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center gap-1 text-xs text-amber-700 hover:text-amber-900 underline mt-2 font-semibold"
-              >
-                🔄 เช็คเรทล่าสุด →
-              </a>
-            </div>
 
-            {/* Emergency Card */}
-            <div className="bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200 rounded-xl p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">🚨</span>
-                <span className="font-extrabold text-red-700">Emergency</span>
-              </div>
-              <div className="text-sm text-red-900 space-y-1">
-                <p><strong>🚔 ตำรวจ:</strong> 110</p>
-                <p><strong>🚑 ฉุกเฉิน/ไฟไหม้:</strong> 119</p>
-                <p><strong>🏥 สายด่วน:</strong> 1922</p>
-              </div>
-              <a 
-                href="https://www.boca.gov.tw/sp-foof-countrycp-03-19-cf102-1.html" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center gap-1 text-xs text-red-700 hover:text-red-900 underline mt-2 font-semibold"
-              >
-                📋 ข้อมูลสถานทูต →
-              </a>
-            </div>
+          {/* Collapsible Quick Info */}
+          <button 
+            onClick={() => setShowQuickInfo(!showQuickInfo)}
+            className="w-full flex items-center justify-between p-2.5 bg-slate-100 rounded-lg mb-2 text-xs font-semibold text-slate-700 active:bg-slate-200 touch-manipulation"
+          >
+            <span>💡 ข้อมูลเพิ่มเติม (สกุลเงิน, ฉุกเฉิน, อากาศ)</span>
+            <span className="text-lg">{showQuickInfo ? '−' : '+'}</span>
+          </button>
 
-            {/* Weather Card */}
-            <div className="bg-gradient-to-br from-sky-50 to-sky-100 border-2 border-sky-200 rounded-xl p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">🌤️</span>
-                <span className="font-extrabold text-sky-700">Weather</span>
+          {showQuickInfo && (
+            <div className="space-y-2 mb-3 animate-fade-in">
+              {/* Currency */}
+              <div className="bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-lg p-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-amber-700 text-xs">💰 Currency</span>
+                  <span className="text-xs text-amber-800">1 THB ≈ 0.95 TWD</span>
+                </div>
+                <a href="https://www.xe.com/currencyconverter/convert/?Amount=1&From=THB&To=TWD" target="_blank" rel="noopener noreferrer" className="text-[10px] text-amber-600 underline">
+                  เช็คเรทล่าสุด →
+                </a>
               </div>
-              <div className="text-sm text-sky-900 space-y-1">
-                <p><strong>🌡️ ม.ค.-ก.พ.:</strong> 12-18°C</p>
-                <p><strong>🧥 แนะนำ:</strong> เสื้อกันหนาว</p>
-                <p className="text-xs text-sky-600">*ข้อมูลจากกรมอุตุไต้หวัน</p>
-              </div>
-              <a 
-                href="https://www.cwa.gov.tw/eng/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center gap-1 text-xs text-sky-700 hover:text-sky-900 underline mt-2 font-semibold"
-              >
-                ☁️ พยากรณ์ล่าสุด (CWA) →
-              </a>
-            </div>
-          </div>
 
-          {/* Tips List */}
-          <ul className="list-none p-0 m-0 mt-4 space-y-2">
-            <li className="pl-2 relative text-sm">
-              💡 <strong>EasyCard (Yoyo Card):</strong> บัตรเดียวเที่ยวทั่วไทย(เป) ใช้ขึ้นรถไฟ, รถเมล์, ซื้อของ 7-11. ซื้อได้ที่สนามบินหรือสถานีรถไฟ
+              {/* Emergency */}
+              <div className="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-2.5">
+                <span className="font-bold text-red-700 text-xs">🚨 Emergency</span>
+                <div className="flex gap-3 mt-1 text-xs text-red-800">
+                  <span>🚔 110</span>
+                  <span>🚑 119</span>
+                  <span>🏥 1922</span>
+                </div>
+              </div>
+
+              {/* Weather */}
+              <div className="bg-gradient-to-br from-sky-50 to-sky-100 border border-sky-200 rounded-lg p-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-sky-700 text-xs">🌤️ Weather (ม.ค.-ก.พ.)</span>
+                  <span className="text-xs text-sky-800">12-18°C 🧥</span>
+                </div>
+                <a href="https://www.cwa.gov.tw/eng/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-sky-600 underline">
+                  พยากรณ์ล่าสุด (CWA) →
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tips List - Compact */}
+          <ul className="list-none p-0 m-0 space-y-1.5">
+            <li className="text-xs flex items-start gap-1">
+              <span>💡</span>
+              <span><strong>EasyCard:</strong> บัตรเดียวเที่ยวทั่วไทเป ซื้อได้ที่สนามบิน</span>
             </li>
-            <li className="pl-2 relative text-sm">
-              💡 <strong>Receipt Lottery:</strong> ใบเสร็จทุกใบในไต้หวันมีค่า! มันคือลอตเตอรี่ อย่าเพิ่งทิ้ง เผื่อตรวจรางวัลได้
+            <li className="text-xs flex items-start gap-1">
+              <span>💡</span>
+              <span><strong>Receipt Lottery:</strong> ใบเสร็จทุกใบคือลอตเตอรี่!</span>
             </li>
-            <li className="pl-2 relative text-sm">
-              💡 <strong>Rain Gear:</strong> ไทเปฝนตกบ่อยมาก พกร่มพับที่แข็งแรงหรือเสื้อกันฝนติดกระเป๋าไว้เสมอ
+            <li className="text-xs flex items-start gap-1">
+              <span>💡</span>
+              <span><strong>Rain Gear:</strong> ฝนตกบ่อย พกร่มเสมอ</span>
             </li>
-            <li className="pl-2 relative text-sm">
-              💡 <strong>Uber:</strong> ถ้ามากัน 3-4 คน บางครั้งนั่ง Uber คุ้มกว่าและสะดวกกว่ารถไฟฟ้าครับ
+            <li className="text-xs flex items-start gap-1">
+              <span>💡</span>
+              <span><strong>Uber:</strong> มา 3-4 คน Uber คุ้มกว่ารถไฟฟ้า</span>
             </li>
           </ul>
         </div>
@@ -208,35 +195,33 @@ const Index = () => {
 
       {/* DAY 1 */}
       <div id="day1" className="day-wrapper">
-        <div className="text-center py-8 px-4 text-white relative" style={{ background: 'linear-gradient(135deg, #2563eb 30%, #db2777 100%)' }}>
-          <h1 className="m-0 font-extrabold text-xl sm:text-2xl tracking-wide" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
-            🇹🇼 TAIPEI TRIP 2026: DAY 1
+        <div className="text-center py-4 px-3 text-white relative" style={{ background: 'linear-gradient(135deg, #2563eb 30%, #db2777 100%)' }}>
+          <h1 className="m-0 font-extrabold text-base tracking-wide" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
+            🇹🇼 DAY 1
           </h1>
-          <h2 className="mt-2 font-semibold text-base sm:text-xl">🛬 Arrival & West Side</h2>
-          <div className="flex justify-center gap-3 mt-4 flex-wrap">
-            <span className="info-badge text-xs sm:text-sm">🗓️ 30 Jan 2026 (Fri)</span>
-          </div>
+          <h2 className="mt-1 font-semibold text-sm">🛬 Arrival & West Side</h2>
+          <span className="inline-block mt-2 info-badge text-[10px] py-1 px-2">🗓️ 30 Jan 2026 (Fri)</span>
         </div>
 
-        <div className="p-4 sm:p-8" style={{ background: 'hsl(210 40% 98%)' }}>
+        <div className="p-3" style={{ background: 'hsl(210 40% 98%)' }}>
           {/* Journey Section */}
-          <div className="rounded-2xl border-4 border-day1 overflow-hidden mb-4" style={{ background: 'hsl(217 91% 97%)' }}>
-            <div className="py-4 px-6 flex items-center text-white" style={{ background: 'linear-gradient(90deg, #2563eb, #1d4ed8)' }}>
-              <h3 className="m-0 font-extrabold text-lg flex items-center gap-3">
-                ✈️ THE JOURNEY (เส้นทางการเดินทาง)
+          <div className="rounded-xl border-2 border-day1 overflow-hidden mb-3" style={{ background: 'hsl(217 91% 97%)' }}>
+            <div className="py-2.5 px-3 flex items-center text-white" style={{ background: 'linear-gradient(90deg, #2563eb, #1d4ed8)' }}>
+              <h3 className="m-0 font-extrabold text-sm flex items-center gap-2">
+                ✈️ THE JOURNEY
               </h3>
             </div>
-            <div className="p-6">
-              {/* Timeline */}
-              <div className="space-y-6">
+            <div className="p-3">
+              {/* Timeline - Compact */}
+              <div className="space-y-3">
                 {/* Step 1 */}
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-day1 text-white flex items-center justify-center text-xl flex-shrink-0 shadow-md">
+                <div className="flex items-start gap-2">
+                  <div className="w-8 h-8 rounded-full bg-day1 text-white flex items-center justify-center text-sm flex-shrink-0 shadow">
                     🛫
                   </div>
-                  <div className="flex-1 bg-white p-4 rounded-xl border-l-4 border-day1 shadow-sm">
-                    <span className="font-extrabold text-day1">10:55 น.</span>
-                    <div className="font-bold mt-1">
+                  <div className="flex-1 bg-white p-2.5 rounded-lg border-l-3 border-day1 shadow-sm">
+                    <span className="font-bold text-day1 text-xs">10:55 น.</span>
+                    <div className="font-semibold text-xs mt-0.5">
                       Suvarnabhumi Airport 
                       <MapLink 
                         title="Suvarnabhumi Airport" 
@@ -247,20 +232,19 @@ const Index = () => {
                         color="#2563eb"
                       />
                     </div>
-                    <p className="text-muted-foreground text-sm mt-1">Flight Departure (ออกเดินทาง)</p>
                   </div>
                 </div>
-                <div className="text-center text-day1 text-2xl ml-6">⬇️</div>
+                <div className="text-center text-day1 text-lg ml-4">⬇️</div>
 
                 {/* Step 2 */}
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-day1 text-white flex items-center justify-center text-xl flex-shrink-0 shadow-md">
+                <div className="flex items-start gap-2">
+                  <div className="w-8 h-8 rounded-full bg-day1 text-white flex items-center justify-center text-sm flex-shrink-0 shadow">
                     🛬
                   </div>
-                  <div className="flex-1 bg-white p-4 rounded-xl border-l-4 border-day1 shadow-sm">
-                    <span className="font-extrabold text-day1">15:25 น.</span>
-                    <div className="font-bold mt-1">
-                      Taoyuan International Airport 
+                  <div className="flex-1 bg-white p-2.5 rounded-lg border-l-3 border-day1 shadow-sm">
+                    <span className="font-bold text-day1 text-xs">15:25 น.</span>
+                    <div className="font-semibold text-xs mt-0.5">
+                      Taoyuan Airport 
                       <MapLink 
                         title="Taoyuan International Airport" 
                         description="ผ่าน ตม. & รับกระเป๋า"
@@ -271,32 +255,32 @@ const Index = () => {
                         color="#2563eb"
                       />
                     </div>
-                    <p className="text-muted-foreground text-sm mt-1">ผ่าน ตม. & รับกระเป๋า (กรอก Arrival Card ออนไลน์มาจะไวมาก)</p>
+                    <p className="text-muted-foreground text-[10px] mt-0.5">ผ่าน ตม. & รับกระเป๋า</p>
                   </div>
                 </div>
-                <div className="text-center text-day1 text-2xl ml-6">⬇️</div>
+                <div className="text-center text-day1 text-lg ml-4">⬇️</div>
 
                 {/* Step 3 */}
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-day1 text-white flex items-center justify-center text-xl flex-shrink-0 shadow-md">
+                <div className="flex items-start gap-2">
+                  <div className="w-8 h-8 rounded-full bg-day1 text-white flex items-center justify-center text-sm flex-shrink-0 shadow">
                     🚆
                   </div>
-                  <div className="flex-1 bg-white p-4 rounded-xl border-l-4 border-day1 shadow-sm">
-                    <span className="font-extrabold text-day1">Airport Express Train</span>
-                    <div className="font-bold mt-1">เข้าสู่ตัวเมือง</div>
-                    <p className="text-muted-foreground text-sm mt-1">นั่งรถไฟสายสีม่วงจาก Airport มุ่งหน้าสู่ Main Station</p>
+                  <div className="flex-1 bg-white p-2.5 rounded-lg border-l-3 border-day1 shadow-sm">
+                    <span className="font-bold text-day1 text-xs">Airport Express</span>
+                    <div className="font-semibold text-xs mt-0.5">เข้าตัวเมือง</div>
+                    <p className="text-muted-foreground text-[10px] mt-0.5">นั่งรถไฟสายสีม่วง → Main Station</p>
                   </div>
                 </div>
-                <div className="text-center text-day1 text-2xl ml-6">⬇️</div>
+                <div className="text-center text-day1 text-lg ml-4">⬇️</div>
 
                 {/* Step 4 */}
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-day1 text-white flex items-center justify-center text-xl flex-shrink-0 shadow-md">
+                <div className="flex items-start gap-2">
+                  <div className="w-8 h-8 rounded-full bg-day1 text-white flex items-center justify-center text-sm flex-shrink-0 shadow">
                     🏨
                   </div>
-                  <div className="flex-1 bg-white p-4 rounded-xl border-l-4 border-day1 shadow-sm">
-                    <span className="font-extrabold text-day1">Check-in</span>
-                    <div className="font-bold mt-1">
+                  <div className="flex-1 bg-white p-2.5 rounded-lg border-l-3 border-day1 shadow-sm">
+                    <span className="font-bold text-day1 text-xs">Check-in</span>
+                    <div className="font-semibold text-xs mt-0.5">
                       Mayer Inn Hotel 
                       <MapLink 
                         title="Mayer Inn Hotel" 
@@ -308,26 +292,25 @@ const Index = () => {
                         color="#2563eb"
                       />
                     </div>
-                    <p className="text-muted-foreground text-sm mt-1">เก็บกระเป๋า พักผ่อนชั่วคราว เตรียมตัวลุย!</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="path-connector">
-            <div className="path-arrow-box">⬇️ เตรียมตัวลุยย่านฮิตยามค่ำคืน... ⬇️</div>
+          <div className="path-connector py-2">
+            <div className="path-arrow-box text-[10px] py-0.5 px-2">⬇️ ลุยย่านซีเหมินติง ⬇️</div>
           </div>
 
           {/* Ximending Section */}
-          <div className="rounded-2xl border-4 border-taiwan-pink overflow-hidden" style={{ background: 'hsl(327 73% 97%)' }}>
-            <div className="py-4 px-6 text-white" style={{ background: 'linear-gradient(90deg, #db2777, #be185d)' }}>
-              <h3 className="m-0 font-extrabold text-lg">
-                🌆 DESTINATION: XIMENDING (ซีเหมินติง) <span className="text-sm opacity-90 ml-2">📍 Wanhua District</span>
+          <div className="rounded-xl border-2 border-taiwan-pink overflow-hidden" style={{ background: 'hsl(327 73% 97%)' }}>
+            <div className="py-2.5 px-3 text-white" style={{ background: 'linear-gradient(90deg, #db2777, #be185d)' }}>
+              <h3 className="m-0 font-extrabold text-sm">
+                🌆 XIMENDING <span className="text-[10px] opacity-90 ml-1">📍 Wanhua</span>
               </h3>
             </div>
 
-            <div className="embed-map-container mx-6 mt-4">
+            <div className="embed-map-container mx-3 mt-2 h-[180px]">
               <iframe 
                 src="https://maps.google.com/maps?q=Ximending+Taipei&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 className="w-full h-full border-0"
@@ -335,18 +318,18 @@ const Index = () => {
               />
             </div>
 
-            <div className="p-6">
+            <div className="p-3">
               {/* Vintage Cafe */}
-              <div className="vintage-box mt-0">
-                <div className="font-extrabold text-amber-800 flex items-center gap-2 mb-2">
-                  <span className="bg-taiwan-orange text-white text-xs py-0.5 px-2 rounded">VINTAGE CAFE</span>
-                  จิบกาแฟร้านคลาสสิก (Coffee Stop)
+              <div className="vintage-box mt-0 p-2.5">
+                <div className="font-bold text-amber-800 flex items-center gap-1 mb-1.5 text-xs">
+                  <span className="bg-taiwan-orange text-white text-[10px] py-0.5 px-1.5 rounded">CAFE</span>
+                  ร้านกาแฟคลาสสิก
                 </div>
-                <ul className="list-none p-0 m-0 space-y-2">
-                  <li data-mission className="pl-6 relative text-sm text-amber-900">
+                <ul className="list-none p-0 m-0 space-y-1.5">
+                  <li data-mission className="pl-5 relative text-xs text-amber-900">
                     <MissionCheckbox id="d1-cafe-1" />
                     <span className={checkedItems.has('d1-cafe-1') ? 'line-through opacity-60' : ''}>
-                      ☕ <strong>Bee Dao Café (Fong Da Coffee):</strong> ร้านกาแฟเก่าแก่ 60+ ปี บรรยากาศวินเทจแท้ๆ แวะจิบกาแฟหรือซื้อคุกกี้
+                      ☕ <strong>Fong Da Coffee:</strong> ร้านกาแฟ 60+ ปี
                       <MapLink 
                         title="Fong Da Coffee" 
                         description="ร้านกาแฟวินเทจ 60+ ปี"
