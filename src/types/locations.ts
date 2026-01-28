@@ -81,6 +81,11 @@ export const locations: LocationsData = {
         googleMapsQuery: "三兄弟豆花 Three Brothers Tofu Pudding Ximending"
       },
       {
+        coords: [25.0326, 121.5299], type: "shopping", title: "Sweedom 甜境", desc: "นูกัตบิสกิตสุดฮิต! (ซีเหมินติง)",
+        review: "ร้านของฝากสุดฮิต 2025-2026! นูกัตบิสกิตแป้งกรอบไส้นุ่มหวานมัน ต้องมาก่อน 12:00 ไม่งั้นคิวยาว! แนะนำรสคลาสสิกและเค็มๆ แพ็คเป็นกล่องน่ารักเหมาะฝากคนที่บ้าน",
+        googleMapsQuery: "甜境 職人手作牛軋餅 Sweedom Ximending"
+      },
+      {
         coords: [25.0432, 121.5082], type: "shopping", title: "Don Don Donki",
         desc: "ห้างดองกี้ 24 ชม.",
         review: "สาขานี้ใหญ่มาก! ชั้น 2 มีโซนอาหารปรุงสุกพร้อมทาน ถ้าหิวรอบดึกแวะมาได้เลย ของฝากพวกขนมญี่ปุ่นราคาบางอย่างถูกกว่าไทยเยอะ",
