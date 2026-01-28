@@ -259,9 +259,14 @@ export const locations: LocationsData = {
         googleMapsQuery: "Heritage Bakery & Cafe 台北市中正區"
       },
       {
-        coords: [25.0480, 121.5168], type: "food", title: "Carrispy Donuts", desc: "โดนัทนมสดทอด",
-        review: "โดนัทนมสดทอดกรอบนอกนุ่มใน คลุกน้ำตาลไอซิ่ง หอมนมมาก! ซื้อตุนไว้กินระหว่างนั่งรถไฟไปสนามบินคือดีงาม",
-        googleMapsQuery: "脆皮鮮奶甜甜圈 Crispy Fresh Milk Donut Taipei Main Station"
+        coords: [25.0478, 121.5170], type: "food", title: "雪系町 Yukimachi", desc: "生甜甜圈สุดฮิต 2025! (Breeze 1F)",
+        review: "ร้านโดนัทสดสไตล์ญี่ปุ่นที่ฮิตสุดๆ! เนื้อนุ่มละมุนเหมือนหิมะ มีทั้งรสหวานและเค็ม แนะนำ 'คาราเมลพุดดิ้ง' และ 'ทีรามิสุ' อยู่ในห้าง Breeze ชั้น 1 เดินจากสถานีหลักง่ายมาก",
+        googleMapsQuery: "雪系町生ドーナツ 微風台北車站 Breeze Taipei Station"
+      },
+      {
+        coords: [25.0460, 121.5150], type: "food", title: "Goo Donut (อาเค็น)", desc: "โดนัทไส้เยิ้มร้านดารา",
+        review: "ร้านของดาราไต้หวัน 阿KEN! โดนัทไส้ทะลักเยิ้มๆ ต้องมาก่อน 14:00 ไม่งั้นหมด แนะนำไส้ช็อกโกแลต, คัสตาร์ด และพิสตาชิโอ ซื้อได้ 3 หรือ 5 ชิ้น/กล่อง",
+        googleMapsQuery: "GooDonut 台北市中正區公園路22-2號"
       },
       {
         coords: [25.0478, 121.5170], type: "shopping", title: "ซื้อของฝาก", desc: "Luchinshu, PX Mart",
