@@ -91,6 +91,11 @@ export const locations: LocationsData = {
         googleMapsQuery: "魷布院鮮烤魷魚 西門成都旗艦店 台北市萬華區成都路61-1號"
       },
       {
+        coords: [25.0425, 121.5070], type: "food", title: "85°C 杜拜巧克力", desc: "🔥 Dubai Chocolate ไวรัล TikTok!",
+        review: "ช็อกโกแลตไวรัลจาก TikTok! ไส้พิสตาชิโอ้เยิ้มๆ ผสมเส้น kataifi กรุบกรอบ หอมมันเข้มข้น ราคาไม่ถึง 100 TWD! แนะนำซื้อ 2-3 ชิ้น กินเองและฝากเพื่อน ร้าน 85°C มีหลายสาขาในซีเหมินติง",
+        googleMapsQuery: "85度C 西門町 Ximending Taipei"
+      },
+      {
         coords: [25.0432, 121.5082], type: "shopping", title: "Don Don Donki",
         desc: "ห้างดองกี้ 24 ชม.",
         review: "สาขานี้ใหญ่มาก! ชั้น 2 มีโซนอาหารปรุงสุกพร้อมทาน ถ้าหิวรอบดึกแวะมาได้เลย ของฝากพวกขนมญี่ปุ่นราคาบางอย่างถูกกว่าไทยเยอะ",
