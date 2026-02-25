@@ -14,10 +14,6 @@ const HeroSection = () => {
       {/* Content - Optimized for mobile */}
       <div className="relative h-full flex flex-col items-center justify-center text-center px-4 pt-14">
         <div className="animate-fade-in">
-          <span className="inline-block bg-taiwan-gold/90 text-white font-bold px-3 py-1 rounded-full text-xs mb-2 shadow-lg">
-            🗓️ 30 JAN - 2 FEB 2026
-          </span>
-          
           <h1 className="text-3xl font-extrabold text-white mb-2 drop-shadow-2xl tracking-tight leading-tight">
             <span className="text-taiwan-cyan">TAIPEI</span> TRIP
           </h1>
