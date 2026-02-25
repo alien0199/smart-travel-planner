@@ -220,7 +220,7 @@ const Index = () => {
                     🛫
                   </div>
                   <div className="flex-1 bg-white p-3 rounded-lg border-l-4 border-day1 shadow-sm">
-                    <span className="font-bold text-day1 text-sm">10:55 น.</span>
+                    
                     <div className="font-semibold text-sm mt-1">
                       Suvarnabhumi Airport 
                       <MapLink 
@@ -242,7 +242,7 @@ const Index = () => {
                     🛬
                   </div>
                   <div className="flex-1 bg-white p-3 rounded-lg border-l-4 border-day1 shadow-sm">
-                    <span className="font-bold text-day1 text-sm">15:25 น.</span>
+                    
                     <div className="font-semibold text-sm mt-1">
                       Taoyuan Airport 
                       <MapLink 
